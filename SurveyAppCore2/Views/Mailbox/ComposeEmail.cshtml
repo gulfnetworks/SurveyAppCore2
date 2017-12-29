@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewData["Title"] = "ComposeEmail";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-primary compose-mail" href="@Url.Action("ComposeEmail", "Mailbox")">Compose Mail</a>
+                        <div class="space-25"></div>
+                        <h5>Folders</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="@Url.Action("Inbox", "Mailbox")"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">16</span> </a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")"> <i class="fa fa-certificate"></i> Important</a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger pull-right">2</span></a></li>
+                            <li><a href="@Url.Action("Inbox", "Mailbox")"> <i class="fa fa-trash-o"></i> Trash</a></li>
+                        </ul>
+                       
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                </div>
+                <h2>
+                    Compse mail
+                </h2>
+            </div>
+            <div class="mail-box">
+
+
+                <div class="mail-body">
+
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">To:</label>
+
+                            <div class="col-sm-9"><input  id="txtTo" type="text" class="form-control" value=""></div>
+                            <div class="col-sm-1">
+                                <a href="#" id="btnAddContact" class="btn btn-white btn-sm">+</a>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject:</label>
+
+                            <div class="col-sm-10"><input id="txtSubject" type="text" class="form-control" value=""></div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="mail-text" style="height:auto">
+
+                    <div class="summernote">
+                        <h3>Hello Client! </h3>
+                         <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        <br />
+                        <br />
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="#" id="btnSendEmail" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                </div>
+                <div class="clearfix"></div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left">Select Names: Contact</h3>
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" id="tmpTable">
+                    <thead>
+                        <tr>
+                            <td>
+                            <div class="checkbox">
+                                    <label><input type="checkbox" value="">All</label>
+                             </div>
+                            </td>
+                            <td>Customer Name</td>
+                            <td>Email</td>
+                            <td>Mobile</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+
+                            </td>
+                            <td>Zaldy</td>
+                            <td>zaldy.piraman2015@gmail.com</td>
+                            <td>13123132</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+
+                            </td>
+                            <td>Zaldy 2</td>
+                            <td>zaldy@gulfnetworks.com</td>
+                            <td>13123132</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=""></label>
+                                </div>
+
+                            </td>
+                            <td>Ahmad</td>
+                            <td>ahmad@gulfnetworks.net</td>
+                            <td>13123132</td>
+                        </tr>
+                    </tbody>
+                
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAddReceiver">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+<environment names="Development,Staging,Production">
+    <link rel="stylesheet" href="~/lib/summernote/summernote.css" />
+    <link rel="stylesheet" href="~/lib/summernote/summernote-bs3.css" />
+</environment>
+
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/summernote/summernote.min.js"></script>
+    </environment>
+
+
+    <script type="text/javascript">
+
+    
+
+        function SendEmail() {
+
+
+            var EmailObject = {
+                "EmailId": 0,
+                "Subject": '',
+                "From": '',
+                "To": '',
+                "CC": '',
+                "Folder": '',
+                "Content": '',
+                "IsRead": 0,
+                "AutoEmail": 0,
+                "SettingsId": 0
+            }
+
+
+
+            EmailObject.EmailId = 0;
+            EmailObject.Content = $('.summernote').summernote('code');
+            EmailObject.Subject = $("#txtSubject").val();
+            EmailObject.To = $("#txtTo").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/SendEmail",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+
+                data: JSON.stringify(EmailObject),
+
+                success: function (data) {
+                    alert('Successfully Send');
+                }
+            });
+
+        }
+
+
+
+        $(document).ready(function () {
+
+            
+
+            $("#btnAddReceiver").on("click", function (e) {
+                e.preventDefault();
+
+                var tmp = $("#txtTo").val();
+
+           
+                for (var i = 1; i < 4; i++) {
+                    if (tmp == '') {
+
+                        tmp = document.getElementById("tmpTable").getElementsByTagName("tr")[i].getElementsByTagName("td")[2].innerText
+                    }
+                    else {
+
+                        tmp = tmp + "," + document.getElementById("tmpTable").getElementsByTagName("tr")[i].getElementsByTagName("td")[2].innerText
+                    }
+                  
+                }
+
+                $("#txtTo").val(tmp)
+            });
+
+            $("#btnAddContact").on("click", function () {
+                $("#myModal").modal();
+            });
+
+            var objEmail = '@ViewData["Email"]';
+            $("#txtTo").val(objEmail);
+
+
+            //$('.summernote').summernote();
+            $('.summernote').summernote({
+                callbacks: {
+                    onImageUpload: function (files, editor, $editable) {
+
+                        alert(1);
+                        var formData = new FormData();
+                        formData.append("file", files[0]);
+
+                        $.ajax({
+                            url: "/api/UploadImage",
+                            data: formData,
+                            type: 'POST',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (imageUrl) {
+
+                                if (!imageUrl) {
+
+                                    // handle error
+                                    alert(imageUrl);
+                                    return;
+                                }
+                                $('.summernote').summernote('editor.insertImage', imageUrl);
+                               
+                            },
+                            error: function () {
+
+                                // handle error
+                            }
+                        });
+                    }
+                }
+            });
+            $("#btnSendEmail").on("click", function (e) {
+                SendEmail();
+            
+                e.preventDefault();
+            });
+        });
+
+    </script>
+}

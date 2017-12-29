@@ -1,0 +1,697 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SurveyAppCore2.Models
+@using System.Security.Principal
+ 
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@{
+    ViewData["Title"] = "Resolution Log";
+    //ViewData["SurveyId"];
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Submission Set: [<span class="lblSubmissionSet"></span>]</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Resolution Log</a>
+            </li>
+            <li class="active">
+                <strong>Create</strong>
+
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row hidden" id="successMsg">
+        <div class="col-lg-12 " >
+            <div class="alert alert-info">
+        <b>Message: </b>Resolution Log created!
+            </div>
+        </div>
+    </div>
+    <div class="row hidden" id="errorMsg">
+        <div class="col-lg-12 " >
+            <div class="alert alert-danger">
+                <i class="fa fa-times"></i><b>Message: </b>Create Resolution Log failed!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 id="txtSurveyDate">  </h5>
+     
+       
+                    <div class="ibox-tools">
+           
+           
+
+
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="50" >
+                        <thead>
+                            <tr>
+                                <th data-type="numeric" id="colNo" >No</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th  data-hide="tablet,phone" >Fired Trigger</th>
+                                <th  data-hide="tablet,phone" data-sort-initial="descending" id="colTrigger">Trigger Status</th>
+                            </tr>
+                        </thead>
+                       <tbody id="tableSurveyContent"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Resolution Log </h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content ibox-heading region1">
+                    <h3>Create NEW Resolution Log # <span id="newLogNo"></span> </h3>
+
+                </div>
+                <div class="ibox-content">
+
+                    <form method="post" class="form-horizontal" asp-action="Index" asp-controller="Surveys">
+
+
+
+                        <div class="region2">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                   SUBMISSION SET: 
+                                </label>
+                                <div class="col-sm-4">
+                                    <div><label class="form-control" >  [<span class="lblSubmissionSet"></span>]:submission <span id="txtSubmission"></span> </label></div>
+                                    <input type="hidden" name="txtSurveyDetailId" id="txtSurveyDetailId" />
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                 UPDATER
+                                </label>
+                                <div class="col-sm-4">
+                                    <div><label class="form-control" id="lblUpdater">  </label></div>
+                                    <input type="hidden" name="txtUserDetailId" id="txtUserDetailId" />
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">STATUS:</label>
+                                <div class="col-sm-8">
+                                    <select class="selectpicker form-control" data-container="body" name="resolutionStatus" id="resolutionStatus" style="max-width:380px;">
+                                        <option value="Resolved">Resolved</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Unresolved">Unresolved</option>
+                                    </select>
+                                    <span class="text-muted">Update status of Submission Set *and* all associated Trigger Logs.</span>
+                                </div>
+
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">    LOG DATE:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="logdate" id="logdate" class="form-control text-muted"  disabled value="2017-11-22 17:05:45">
+                                    
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">RESOLUTION DETAILS:</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control"  cols="40" id="ResolutionDetails" name="log" rows="10"></textarea>
+                                    <span class="text-muted pull-right">You have <b id="remainingTextCount">2000</b> characters left.</span>
+                                    <span class="text-muted">Maximum 2000 characters</span>
+                          
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit" id="btnAddResolution"><i class="fa fa-send"></i>&nbsp;Submit Resolution Log</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="region3"></div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Processed <span id="resultTotal"></span> result in 1.60 seconds. </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content ibox-heading region1">
+                    <h3>Historical Resolution Logs</h3>
+
+                </div>
+                <div class="ibox-content">
+                    <table id="resolutionLogTable" class="footable table-bordered table table-stripped toggle-arrow-tiny" data-page-size="8">
+                        <thead>
+                            <tr>
+                                <th data-toggle="true">No.</th>
+                                <th data-hide="phone,tablet">Seq</th>
+                                <th data-hide="phone,tablet">Date</th>
+                                <th data-hide="phone,tablet">Time</th>
+                                <th data-hide="phone,tablet">Country</th>
+                                <th data-hide="phone,tablet">Outlet</th>
+                                <th>Updater</th>
+                                <th>Status</th>
+                                <th  data-sort-ignore="true">Resolution Log</th>
+                                <th data-hide="all" >Resolution Log</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resolutionlogBody">
+                     
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="triggerContainer" />
+
+@section Styles {
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/footable/css/footable.core.css" />
+        
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/footable/css/footable.core.min.css" />
+    </environment>
+    <style>
+        .footable-odd {
+            background-color: #f7f7f7 !important;
+        }
+        .footable-even {
+            background-color: white !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/footable/dist/footable.all.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        function LoadResolutionLogData() {
+            function expandRow(row){
+                $("#reslogRow" + row).click();
+            
+            }
+
+            var surveyId = @ViewData["SurveyId"];
+            $.ajax({
+                type: "POST",
+                url: "/api/GetResolutionLogBySurveyId",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(surveyId),
+                success: function (data) {
+                    //alert(data[0].status);
+
+                    var tmpHtmlResolutionLog = '';
+                    if(data != null)
+                    {
+                        for (var i = 0; i < data.length; i++) {
+                                var tmpStatus = '';
+                                if ( data[i].status == 'Unresolved') {
+                                    tmpStatus = '<span class="label label-danger">' +  $("#triggerContainer").val() + ' - Unresolved</span>';
+
+                                } else if ( data[i].status == 'Resolved') {
+
+                                    tmpStatus = '<span class="label label-primary">' +  $("#triggerContainer").val()  + ' - Resolved</span>';
+                                } else {
+
+                                    tmpStatus = '<span class="label  label-warning">' +  $("#triggerContainer").val()  + ' - Pending</span>';
+                                }
+
+
+                                tmpHtmlResolutionLog = tmpHtmlResolutionLog + 
+                                        '<tr><td>' + (i + 1) + '</td>' + 
+                                        '<td>' + (data.length - i ) + '</td>' + 
+                                        '<td>' + data[i].utcDate  + '</td>' + 
+                                        '<td>' + data[i].utcTime + '</td>' + 
+                                        '<td>' + data[i].outletCountry + '</td>' + 
+                                        '<td>' + data[i].outletName + '</td>' + 
+                                        '<td>' + data[i].updaterName + '</td>' + 
+
+
+
+                                        '<td>' + tmpStatus + '</td>' + 
+                                    
+                               '<td class="text-success" >' + 
+                               '    View details' +
+                               ' </td>' +
+
+                                        '<td>' + data[i].resolutionDetails + '</td></tr>';
+                            }
+
+                        $("#resolutionlogBody").html(tmpHtmlResolutionLog);
+                        $('#resolutionLogTable').trigger('footable_redraw');
+
+                        $("#newLogNo").text( data.length + 1);
+                        $("#resultTotal").text(data.length);
+                    }
+                    else{
+
+                        $("#newLogNo").text(1)
+                    }
+                }
+            });
+        }
+
+        function FormatDateTime(date,time){
+
+            var formatedDateTime = date.split("-")[0] + '-{0}-' + date.split("-")[2] + " " + time + " UTC" ;
+
+            switch (date.split("-")[1]) {
+                case '1': return formatedDateTime.replace("{0}",'Jan') ;
+                case '2': return formatedDateTime.replace("{0}",'Feb') ;
+                case '3': return formatedDateTime.replace("{0}",'Mar') ;
+                case '4': return formatedDateTime.replace("{0}",'Apr') ;
+                case '5': return formatedDateTime.replace("{0}",'May') ;
+                case '6': return formatedDateTime.replace("{0}",'Jun') ;
+                case '7': return formatedDateTime.replace("{0}",'Jul') ;
+                case '8': return formatedDateTime.replace("{0}",'Aug') ;
+                case '9': return formatedDateTime.replace("{0}",'Sep') ;
+                case '10': return formatedDateTime.replace("{0}",'Oct') ;
+                case '11': return formatedDateTime.replace("{0}",'Nov') ;
+                case '12': return formatedDateTime.replace("{0}",'Dec') ;
+                default:
+            }
+
+        }
+
+        function LoadSurveyData() {
+            var surveyId = "@ViewData["SurveyId"]";
+
+            $.ajax({
+                type: "POST",
+                url: "/api/GetSurveyDataCompleteByIdForResolutionLog",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(surveyId),
+                success: function (data) {
+                    var tmpHtml = '';
+
+
+
+
+                    $("#txtSurveyDate").text(FormatDateTime(data.utcDate, data.utcTime));
+
+
+                    //tmpHtml = tmpHtml + '<tr><td></td><td>' + (i + 1) + '</td>';
+                    //tmpHtml = tmpHtml + '<td>' + data.utcDate + '</td>';
+                    //tmpHtml = tmpHtml + '<td>' + data.utcTime + '</td>';
+                    tmpHtml = tmpHtml + '<tr><td>1</td><td>Customer:</td><td>' + data.customer + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>2</td><td>Mobile No:</td><td>' + data.mobileNo + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>3</td><td>Email:</td><td>' + data.email + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>4</td><td>Check No:</td><td>' + data.checkNo + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>5</td><td>Country:</td><td>' + data.outletCountry + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>6</td><td>Outlet:</td><td>' + data.outletName + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>7</td><td>Manager:</td><td>' + data.manager + '</td><td></td><td></td></tr>';
+                    tmpHtml = tmpHtml + '<tr><td>8</td><td>Staff:</td><td>' + data.staff + '</td><td></td><td></td></tr>';
+
+
+
+
+                    var trigger = 0;
+                    var triggerStatus = '';
+                    var valueTrigger = '';
+                    var qualityTrigger = '';
+                    var serviceTrigger = '';
+                    var ambienceTrigger = '';
+                    var recommendTrigger = '';
+
+
+
+
+
+                    if (parseInt(data.valueRate) < 5) {
+
+                        valueTrigger = '<span class="label  label-danger">Value - ' + data.valueRate + '</span>';
+                        trigger = trigger + 1;
+
+                    }
+                    if (parseInt(data.qualityRate) < 5) {
+                        qualityTrigger = '<span class="label  label-danger">Quality - ' + data.qualityRate + '</span>';
+                        trigger = trigger + 1;
+                    }
+                    if (parseInt(data.serviceRate) < 5) {
+                        serviceTrigger = '<span class="label  label-danger">Service - ' + data.serviceRate + '</span>';
+                        trigger = trigger + 1;
+
+                    }
+
+                    if (parseInt(data.ambienceRate) < 5) {
+                        ambienceTrigger = '<span class="label  label-danger">Ambience - ' + data.ambienceRate + '</span>';
+                        trigger = trigger + 1;
+
+                    }
+
+                    if (parseInt(data.recommendRate) < 5) {
+                        recommendTrigger = '<span class="label  label-danger">Recommendation - ' + data.recommendRate + '</span>';
+                        trigger = trigger + 1;
+
+                    }
+
+                    if (trigger == 0) {
+                        $("#colTrigger").removeAttr("data-sort-initial");
+                        $("#colNo").attr("data-sort-initial", true);
+
+                    } else {
+                        $("#colNo").removeAttr("data-sort-initial");
+                        $("#colTrigger").attr("data-sort-initial", "descending");
+                    }
+
+
+                    if (data.status == 'Unresolved') {
+                        triggerStatus = '<span class="label label-danger">' + trigger + ' - Unresolved</span>';
+
+                    } else if (data.status == 'Resolved') {
+
+                        triggerStatus = '<span class="label label-primary">' + trigger + ' - Resolved</span>';
+                    } else {
+
+                        triggerStatus = '<span class="label  label-warning">' + trigger + ' - Pending</span>';
+                    }
+
+                    $("#resolutionStatus").val(data.status);
+                    $("#triggerContainer").val(trigger);
+                    var curCount = 10;
+
+                    curCount = curCount + 1;
+                    tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>Please rate our value on a scale of 1 (poor) to 10 (excellent)</td><td>' + data.valueRate + '</td><td>' + valueTrigger + '</td><td>' + (parseInt(data.valueRate) < 5 ? triggerStatus : '') + '</td></tr>';
+
+                    if (data.valueComment != null) {
+                        if (data.valueComment.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Value Feedback</td><td>" + data.valueComment + "</td><td></td><td></td></tr>";
+                        }
+                    }
+
+
+                    curCount = curCount + 1;
+                    tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>Please rate our quality on a scale of 1 (poor) to 10 (excellent):</td><td>' + data.qualityRate + '</td><td>' + qualityTrigger + '</td><td>' + (parseInt(data.qualityRate) < 5 ? triggerStatus : '') + '</td></tr>';
+
+
+                    if (data.qualityComment != null) {
+                        if (data.qualityComment.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Quality Feedback</td><td>" + data.qualityComment + "</td><td></td><td></td></tr>";
+
+                        }
+                    }
+
+                    curCount = curCount + 1;
+                    tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>Please rate our service on a scale of 1 (poor) to 10 (excellent)</td><td>' + data.serviceRate + '</td><td>' + serviceTrigger + '</td><td>' + (parseInt(data.serviceRate) < 5 ? triggerStatus : '') + '</td></tr>';
+
+
+                    if (data.serviceComment != null) {
+                        if (data.serviceComment.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Service Feedback</td><td>" + data.serviceComment + "</td><td></td><td></td></tr>";
+                        }
+                    }
+
+                    curCount = curCount + 1;
+                    tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>Please rate our ambience on a scale of 1 (poor) to 10 (excellent):</td><td>' + data.ambienceRate + '</td><td>' + ambienceTrigger + '</td><td>' + (parseInt(data.ambienceRate) < 5 ? triggerStatus : '') + '</td></tr>';
+
+                    if (data.ambienceComment != null) {
+                        if (data.ambienceComment.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Ambience Feedback</td><td>" + data.ambienceComment + "</td><td></td><td></td></tr>";
+                        }
+                    }
+
+                    curCount = curCount + 1;
+                    if (data.lastVisit == '0') {
+                        tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>When was your last visit to our restaurant?</td><td>Never</td><td></td><td></td></tr>';
+                    } else if (data.lastVisit == '1') {
+                        tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>When was your last visit to our restaurant?</td><td>1 Months</td><td></td><td></td></tr>';
+                    } else if (data.lastVisit == '3') {
+                        tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>When was your last visit to our restaurant?</td><td>3 Months</td><td></td><td></td></tr>';
+                    } else if (data.lastVisit == '6') {
+                        tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>When was your last visit to our restaurant?</td><td>6 Months</td><td></td><td></td></tr>';
+                    } else if (data.lastVisit == '99') {
+                        tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>When was your last visit to our restaurant?</td><td>>6 Months</td><td></td><td></td></tr>';
+                    }
+
+                    curCount = curCount + 1;
+                    tmpHtml = tmpHtml + '<tr><td>' + curCount + '</td><td>On a scale of 1 (least likely) to 10 (most likely), would you recommend us to your friends?</td><td>' + data.recommendRate + '</td><td>' + recommendTrigger + '</td><td>' + (parseInt(data.recommendRate) < 5 ? triggerStatus : '') + '</td></tr>';
+
+
+                    if (data.recommendPoorArea != null) {
+                        if (data.recommendPoorArea.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Recommendation Poor Area</td><td>" + data.recommendPoorArea + "</td><td></td><td></td></tr>";
+                        }
+                    }
+
+                    if (data.recommendImprovements != null) {
+                        if (data.recommendImprovements.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Recommendation Improvements</td><td>" + data.recommendImprovements + "</td><td></td><td></td></tr>";
+                        }
+                    }
+                    if (data.recommendSuggestions != null) {
+                        if (data.recommendSuggestions.length > 0) {
+                            curCount = curCount + 1;
+
+                            tmpHtml = tmpHtml + "<tr><td>" + curCount + "</td><td>Recommendation Suggestions</td><td>" + data.recommendSuggestions + "</td><td></td><td></td></tr>";
+                        }
+                    }
+
+
+
+
+
+
+                    //if (data.status == 'Unresolved') {
+                    //    tmpHtml = tmpHtml + '<td><span class="label label-danger">Unresolved</span></td>';
+
+                    //} else if (data.status == 'Resolved') {
+
+                    //    tmpHtml = tmpHtml + '<td><span class="label label-primary">Resolved</span></td>';
+                    //} else {
+
+                    //    tmpHtml = tmpHtml + '<td><span class="label  label-warning">Pending</span></td>';
+                    //}
+
+
+
+                    //tmpHtml = tmpHtml + '<td class="text-right">';
+                    //tmpHtml = tmpHtml + '  <div class="btn-group">';
+                    //tmpHtml = tmpHtml + '      <button class="btn-white btn btn-xs">More</button>';
+                    //tmpHtml = tmpHtml + '  </div>';
+                    //tmpHtml = tmpHtml + ' </td>';
+
+
+                    //tmpHtml = tmpHtml + '<td><small>' + feedbackContent + '</small></td></tr>';
+
+
+                    $("#tableSurveyContent").html(tmpHtml);
+
+                    $('.footable').footable();
+                    $('.footable2').footable();
+
+                    LoadResolutionLogData();
+                    //last
+                }
+            });
+        }
+
+        function AddResolutionLog() {
+            var surveyId = "@ViewData["SurveyId"]";
+            var updaterEmail = "@UserManager.GetUserName(User)";
+            var resolutionDetails = $("#ResolutionDetails").val();
+            var selectedStatus = $("#resolutionStatus").val();
+            var updaterId = '@ViewData["UserDetailId"]';
+            var ResolutionLogObject = {
+                "SurveyId": surveyId,
+                "UpdaterId": updaterId,
+                "ResolutionDetails": resolutionDetails,
+                "Status" : selectedStatus
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/AddResolutionLog",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(ResolutionLogObject),
+
+                success: function (data) {
+                    //window.location.href = '/resolutionlog/create?Id=' + data + '&Created=true';
+                    location.reload();
+                }
+            });
+
+        }
+
+        $(document).ready(function () {
+
+            $("#lblUpdater").text('@ViewData["UserDetailComplete"]');
+            $("#txtUserDetailId").val('@ViewData["UserDetailId"]')
+            $(".lblSubmissionSet").html("@ViewData["SurveyId"]");
+
+            var lastId= "@ViewData["LastInsertedId"]";
+            $("#txtSubmission").text("000000".substr( lastId.length, 6 - lastId.length) + lastId);
+            var curDateTime = "@ViewData["CurrentDateTimeUTC"]";
+            $("#logdate").val(curDateTime);
+            LoadSurveyData();
+     
+
+            $("#ResolutionDetails").on('keydown',function(){
+                if($("#ResolutionDetails").val().length >=2000) {
+                    $("#ResolutionDetails").val($("#ResolutionDetails").val().substr(0,2000));
+                    $("#remainingTextCount").html(0);
+                    return;
+                }
+                $("#remainingTextCount").html(2000 -   $("#ResolutionDetails").val().length  - 1);
+            });
+
+
+            $("#ResolutionDetails").on('change',function(){
+                if($("#ResolutionDetails").val().length >=2000) {
+                    $("#ResolutionDetails").val($("#ResolutionDetails").val().substr(0,2000));
+                    $("#remainingTextCount").html(0);
+                    return;
+                }
+                $("#remainingTextCount").html(2000 -   $("#ResolutionDetails").val().length);
+            });
+
+            $("#btnAddResolution").on("click",function(event){
+                event.preventDefault();
+                AddResolutionLog();
+             
+            })
+           
+            if( window.location.href.toLowerCase().indexOf("created=true") > -1){
+                $("#successMsg").removeClass("hidden");
+            
+            }
+           
+        });
+
+
+
+
+
+
+    </script>
+}

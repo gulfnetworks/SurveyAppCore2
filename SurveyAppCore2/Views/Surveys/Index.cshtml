@@ -1,0 +1,486 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+    ViewData["Title"] = ViewData["CompanyName"];
+}
+
+@model Survey
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins borderX">
+       
+                @*REGION 1 Visit Details ===========================================================*@
+                <div class="ibox-title region1">
+                    <h3>Visit Details</h3>
+
+                </div>
+                <div class="ibox-content ibox-heading region1">
+                    <h3>We welcome your feedback! Please fill in the following. </h3>
+                    <span>(*) INDICATES REQUIRED RESPONSE</span>
+                </div>
+
+                @*REGION 1 END =====================================================================*@
+
+
+
+                @*REGION 2 Customer Details ========================================================*@
+
+                <div class="ibox-title region2">
+                    <h3>Customer Details</h3>
+
+                </div>
+                <div class="ibox-content ibox-heading region2">
+                    <h3>Thank You for Visiting Manhattan Fish Market</h3>
+                    We hope you had a good time! Your dining experience is valuable to us. Share your experience with us! No thought is too fishy for us.</small>
+                </div>
+
+                @*REGION 2 END =====================================================================*@
+
+
+                <div class="ibox-content">
+                    <form method="post"  class="form-horizontal" action="#">
+
+                        <div class="region1">
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">COUNTRY</label>
+                                <div class="col-sm-8">
+                                    <select class="selectpicker form-control" data-container="body" name="country" id="country">
+
+                                        <option value="AE">United Arab Emirates</option>
+
+                                        <option value="Bangladesh">Bangladesh</option>
+
+                                        <option value="Brunei Darussalam">Brunei Darussalam</option>
+
+                                        <option value="Indonesia">Indonesia</option>
+
+                                        <option value="India">India</option>
+
+                                        <option value="Japan">Japan</option>
+
+                                        <option value="Sri Lanka">Sri Lanka</option>
+
+                                        <option value="Myanmar">Myanmar</option>
+
+                                        <option value="Maldives">Maldives</option>
+
+                                        <option value="Malaysia">Malaysia</option>
+
+                                        <option value="Oman">Oman</option>
+
+                                        <option value="Qatar">Qatar</option>
+
+                                        <option value="Singapore">Singapore</option>
+
+                                        <option value="Thailand">Thailand</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">OUTLET</label>
+                                <div class="col-sm-8">
+
+                                    <select class="selectpicker form-control" data-container="body" id="OutletId" name="OutletId"></select>
+                                    <span class="text-danger field-validation-error" data-valmsg-for="OutletId" data-valmsg-replace="true">The OutletId field is required.</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">MANAGER ON DUTY</label>
+                                <div class="col-sm-8">
+
+
+                                    <select class="selectpicker form-control" data-container="body" id="ManagerId" name="ManagerId"></select>
+                                    <span class="text-danger field-validation-error" data-valmsg-for="ManagerId" data-valmsg-replace="true">The ManagerId field is required.</span>
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">ATTENDING STAFF</label>
+                                <div class="col-sm-8">
+                                    <select class="selectpicker form-control" data-container="body" id="StaffId" name="StaffId"></select>
+                                    <span class="text-danger field-validation-error" data-valmsg-for="StaffId" data-valmsg-replace="true">The StaffId field is required.</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">TABLE NO#</label>
+                                <div class="col-sm-8"><input type="text" id="TableNo" name="TableNo" class="form-control">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="TableNo" data-valmsg-replace="true">The TableNo field is required.</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">CHECK NO#</label>
+                                <div class="col-sm-8"><input type="text" id="CheckNo" name="CheckNo" class="form-control">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="CheckNo" data-valmsg-replace="true">The CheckNo field is required.</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <a class="btn btn-primary" href="#" id="btnRegion1"><i class="fa fa-send"></i>&nbsp;Submit</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="region2">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">NAME</label>
+                                <div class="col-sm-8"><input type="text" name="Customer" id="Customer" class="form-control">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="Customer" data-valmsg-replace="true">The Customer field is required.</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">EMAIL</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" name="Email" id="Email">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="Email" data-valmsg-replace="true">The Email field is required.</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+
+                                </label>
+                                <div class="col-sm-10">
+                                    <div class="checkbox"><label> <input type="checkbox" value=""> SUBSCRIBE EMAIL TO NEWS AND DEAL </label></div>
+
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">MOBILE NO#</label>
+                                <div class="col-sm-8"><input type="text" class="form-control" name="MobileNo" id="MobileNo">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="MobileNo" data-valmsg-replace="true">The MobileNo field is required.</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+
+                                    @*<a class="btn btn-primary" href="#" id="btnRegion2"><i class="fa fa-send"></i>&nbsp;Submit</a>*@
+                                    <button class="btn btn-primary" type="submit" id="btnRegion2"><i class="fa fa-send"></i>&nbsp;Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="region3"></div>
+                        <input type="hidden" name="Action" id="Action" value="@ViewData["CompanyCode"]">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+@section Scripts {
+@await Html.PartialAsync("_ValidationScriptsPartial")
+
+<script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript">
+
+
+    function GetStaffByOutletId(id) {
+        var company = '@ViewData["CompanyCode"]';
+
+        $.ajax({
+            url: "/api/GetAllStaffByOutletId?Company=" + company + "&OutletId=" + id,
+            type: "GET",
+
+            contentType: "application/json",
+            success: function (data) {
+                var tempHtml = '<option data-subtext="(No Selected Staff)" value="0">None</option>';
+
+                //jobTitleId: 1, jobTitleDesc:
+                for (var i = 0; i < data.length; i++) {
+                    tempHtml = tempHtml + '<option value="' + data[i].userDetailId + '" >' + data[i].userFirstName + " " + data[i].userLastName + "</option>";
+
+                }
+
+                $("#StaffId").html(tempHtml);
+                $("#StaffId").selectpicker("refresh");
+            }
+        });
+    }
+
+
+    function GetAllOutletByCountry(country) {
+        $.ajax({
+            url: "/api/GetAllOutlet2",
+            type: "GET",
+            async: true,
+            contentType: "application/json",
+            success: function (data) {
+                var tempHtml = '<option data-subtext="(No Selected Outlet)" value="0">None</option>';
+
+
+
+                for (var i = 0; i < data.length; i++) {
+                    if (country.toUpperCase() == data[i].outletCountry) {
+                        tempHtml = tempHtml + '<option value="' + data[i].outletId + '" data-subtext="' + country + '">' + data[i].outletName + "</option>";
+                    }
+                }
+
+
+
+                $("#OutletId").html(tempHtml);
+                $("#OutletId").selectpicker("refresh");
+
+
+
+            }
+        });
+
+    }
+
+    function GetAllManagerByOutletId(outletId) {
+        var company = '@ViewData["CompanyCode"]';
+
+
+        $.ajax({
+            url: "/api/GetAllManager2?Company=" + company,
+            type: "GET",
+            contentType: "application/json",
+            success: function (data) {
+                var tempHtml = '<option data-subtext="(No Selected Manager)" value="0">None</option>';
+                var curOutlet = '';
+                //jobTitleId: 1, jobTitleDesc:
+                for (var i = 0; i < data.length; i++) {
+
+                    if (data[i].outletId == outletId) {
+
+                        tempHtml = tempHtml + '<option value="' + data[i].userDetailId + '" data-subtext="' + data[i].jobTitleDesc + '">' + data[i].userFirstName + " " + data[i].userLastName + "</option>";
+                    }
+                }
+
+                $("#ManagerId").html(tempHtml);
+                $("#ManagerId").selectpicker("refresh");
+
+
+            }
+        });
+
+    }
+
+
+
+    function ValidateRegion1() {
+        var ret = true;
+
+        $("[data-valmsg-for]").hide();
+
+        if ($("#OutletId").val() == null || $("#OutletId").val() == 0) { ret = false; $("[data-valmsg-for=OutletId]").show(); }
+        if ($("#country").val() == null) { ret = false; $("[data-valmsg-for=country]").show(); }
+        if ($("#ManagerId").val() == null || $("#ManagerId").val() == 0) { ret = false; $("[data-valmsg-for=ManagerId]").show(); }
+        if ($("#StaffId").val() == null || $("#StaffId").val() == 0) { ret = false; $("[data-valmsg-for=StaffId]").show(); }
+        if ($("#CheckNo").val() == "") { ret = false; $("[data-valmsg-for=CheckNo]").show(); }
+        if ($("#TableNo").val() == "") { ret = false; $("[data-valmsg-for=TableNo]").show(); }
+
+        return ret;
+    }
+
+
+    function ValidateRegion2() {
+        var ret = true;
+
+        $("[data-valmsg-for]").hide();
+
+
+        if ($("#Customer").val() == "") { ret = false; $("[data-valmsg-for=Customer]").show(); }
+        if ($("#MobileNo").val() == "") { ret = false; $("[data-valmsg-for=MobileNo]").show(); }
+        if ($("#Email").val() == "") { ret = false; $("[data-valmsg-for=Email]").show(); }
+        return ret;
+    }
+
+
+    $(document).ready(function () {
+        var objCompanyName = '@ViewData["CompanyName"]';
+        var objCompanyCode = '@ViewData["CompanyCode"]';
+        $("#companyName").html(objCompanyName);
+
+        $("#btnNavLogin").attr("href", "/Account/Login?company=" + objCompanyCode);
+
+
+        $(".region2").hide();
+
+        $("[data-valmsg-for]").hide();
+        $('#btnRegion1').on('click', function () {
+
+            if (ValidateRegion1()) {
+                $(".region1").hide();
+                $(".region2").show();
+
+            }
+
+
+        });
+
+
+
+
+
+        $('#btnRegion2').on('click', function (event) {
+
+
+            AddNewSurvey();
+            //AddNewSurvey2();
+            event.preventDefault();
+
+        });
+
+
+
+
+        $('#Active').on('change', function () {
+            if ($(this).prop("checked")) {
+
+                $(this).val(1);
+            }
+            else {
+                $(this).val(0);
+            }
+
+        });
+
+
+        $('#country').on('change', function () {
+            GetAllOutletByCountry($('#country').val());
+
+        });
+
+
+        $('#OutletId').on('change', function () {
+            GetAllManagerByOutletId($('#OutletId').selectpicker("val"));
+            GetStaffByOutletId($('#OutletId').selectpicker("val"));
+
+        });
+
+
+    });
+
+
+    // new code
+
+    function AddNewSurvey() {
+
+
+
+        var xx = {
+
+            "OutletId": 0,
+            "ManagerId": 0,
+            "StaffId": 0,
+            "TableNo": '',
+            "CheckNo": '',
+            "Customer": '',
+            "Email": '',
+            "MobileNo": '',
+            "Action": ''
+        };
+
+
+        //var xx = {
+        //    'SurveyId' : 0,
+        //    'Action' : '',
+        //    'Status' : '',
+        //    'Customer' : '',
+        //    'MobileNo' : '',
+        //    'Email' : '',
+        //    'CheckNo' : '',
+        //    'TableNo' : '',
+        //    'ManagerId' : 0,
+        //    'StaffId' : 0,
+        //    'OutletId' : 0
+        //}
+
+
+
+        xx.Action = '@ViewData["CompanyCode"]';
+        xx.OutletId = $("#OutletId").selectpicker("val").toString();
+        xx.ManagerId = $("#ManagerId").selectpicker("val").toString();
+        xx.StaffId = $("#StaffId").selectpicker("val").toString();
+        xx.TableNo = $("#TableNo").val();
+        xx.CheckNo = $("#CheckNo").val();
+        xx.Customer = $("#Customer").val();
+        xx.Email = $("#Email").val();
+        xx.MobileNo = $("#MobileNo").val();
+
+        $.ajax({
+            url: '/Surveys/AddNewSurvey',
+            type: "POST",
+            dataType: 'json',
+            contentType: "application/json",
+            //type: "POST",
+            //url: "/Surveys/Index",
+            //contentType: "application/json",
+            //async: true,
+            data: JSON.stringify(xx),
+
+            success: function (data) {
+                if (typeof window != 'undefined'){
+                    window.location.href = data.url;
+
+                }
+                else {
+
+                    document.location.href = data.url;
+                }
+               
+            }
+        });
+
+    }
+
+
+    // new code2
+
+
+</script>
+}
+
+@section Styles {
+
+<link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<style>
+
+
+    #page-wrapper {
+        min-height: 100vh !important;
+    }
+
+    .radio-inline {
+        min-width: 35px;
+    }
+</style>
+
+}
+
+
+

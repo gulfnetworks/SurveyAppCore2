@@ -1,0 +1,169 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SurveyAppCore2.Models
+@using System.Security.Principal
+@using  SurveyAppCore2.DataProvider
+@using SurveyAppCore2.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{ 
+
+    UserDetailDataProvider userDetailDataProvider = new UserDetailDataProvider();
+
+    var userDetails = await userDetailDataProvider.GetUserDetailByEmail(UserManager.GetUserName(User));
+    var userDetailsComplete = await userDetailDataProvider.GetUserDetailCompleteById(userDetails.UserDetailId);
+
+    SettingsDataProvider settingsDataProvider = new SettingsDataProvider();
+    var settings = await settingsDataProvider.GetSettings(userDetails.SettingsId);
+
+}
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                   
+                    @if (settings.CompanyLogoUrl != null && settings.CompanyLogoUrl != "" && settings.CompanyLogoUrl != "/images/logo/")
+                    {
+                        <span>
+                            <img alt="image" class="img-thumbnail img-circle"   src="@settings.CompanyLogoUrl" id="companylogodisplay">
+                        </span>
+
+                    }
+
+    
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">@(userDetails.UserFirstName + " " + userDetails.UserLastName )</strong>
+                            </span> <span class="text-muted text-xs block">@userDetailsComplete.JobTitleDesc</span>
+                        </span>
+                    </a>
+              
+                </div>
+                <div class="logo-element">
+                    <i class="fa fa-gears" id="expandMenu"></i>
+                </div>
+            </li>
+            @*<li class="">
+                <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="">Dashboard v.1</a></li>
+                    <li class=""><a href="@Url.Action("Dashboard_2", "Dashboards")">Dashboard v.2</a></li>
+                    <li class=""><a href="@Url.Action("Dashboard_3", "Dashboards")">Dashboard v.3</a></li>
+                    <li class=""><a href="@Url.Action("Dashboard_4_1", "Dashboards")">Dashboard v.4</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index", "Layouts")"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span> <span class="label label-primary pull-right">NEW</span></a>
+            </li>
+            <li class="">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("Flot", "Graphs")">Flot Charts</a></li>
+                    <li class=""><a href="@Url.Action("Morris", "Graphs")">Morris.js Charts</a></li>
+                    <li class=""><a href="@Url.Action("Rickshaw", "Graphs")">Rickshaw Charts</a></li>
+                    <li class=""><a href="@Url.Action("Chartjs", "Graphs")">Chart.js</a></li>
+                    <li class=""><a href="@Url.Action("Peity", "Graphs")">Peity Charts</a></li>
+                    <li class=""><a href="@Url.Action("Sparkline", "Graphs")">Sparkline Charts</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("Inbox", "Mailbox")">Inbox</a></li>
+                    <li class=""><a href="@Url.Action("EmailView", "Mailbox")">Email view</a></li>
+                    <li class=""><a href="@Url.Action("ComposeEmail", "Mailbox")">Compose email</a></li>
+                    <li class=""><a href="@Url.Action("EmailTemplates", "Mailbox")">Email templates</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index", "Widgets")"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span> </a>
+            </li>*@
+            @*<li class="">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Forms</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("BasicFroms", "Forms")">Basic form</a></li>
+                    <li class=""><a href="@Url.Action("Advanced", "Forms")">Advanced Plugins</a></li>
+                    <li class=""><a href="@Url.Action("Wizard", "Forms")">Wizard</a></li>
+                    <li class=""><a href="@Url.Action("FileUpload", "Forms")">File Upload</a></li>
+                    <li class=""><a href="@Url.Action("TextEditor", "Forms")">Text Editor</a></li>
+                    <li class=""><a href="@Url.Action("Survey", "Forms")">Survey</a></li>
+                </ul>
+            </li>*@
+
+
+            @if (settings.CompanyCode.ToUpper() != "ADMIN")
+            {
+            <li class="">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Reports</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("GeneralSurveyReport", "Reports")">General</a></li>
+                    <li class=""><a href="@Url.Action("ManagerReport", "Reports")">Manager</a></li>
+                    <li class=""><a href="@Url.Action("StaffReport", "Reports")">Staff</a></li>
+                    <li class=""><a href="@Url.Action("OutletReport", "Reports")">Outlet</a></li>
+                    <li class=""><a href="#">Score Chart</a></li>
+                    <li class=""><a href="@Url.Action("FeedbackReport", "Reports")">Customer Feedback</a></li>
+                    <li class=""><a href="@Url.Action("CustomerReport", "Reports")">Customer Report</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#"><i class="fa fa-check-square-o"></i> <span class="nav-label">Surveys</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="/Surveys/Index?Company=@settings.CompanyCode" id="btnTakeSurvey">Take Survey</a></li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#"><i class="fa fa-user-o"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("Register", "Account")">Add User</a></li>
+                    <li class=""><a href="@Url.Action("UserList", "Account")">View Users</a></li>
+                </ul>
+            </li>
+
+            <li class="">
+                <a href="#"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class=""><a href="@Url.Action("Time", "Settings")">Time</a></li>
+                    <li class=""><a href="@Url.Action("Company", "Settings")">Company</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label" data-i18n="nav.mailbox">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="@Url.Action("Inbox", "Mailbox")">Inbox</a></li>
+                    <li><a href="@Url.Action("EmailView", "Mailbox")">Email view</a></li>
+                    <li><a href="@Url.Action("ComposeEmail", "Mailbox")">Compose email</a></li>
+                    <li><a href="@Url.Action("EmailTemplates", "Mailbox")">Email templates</a></li>
+                    <li><a href="@Url.Action("ThankYouEmail", "Mailbox")">Thankyou Email</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label" data-i18n="nav.mailbox">Subscription</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="@Url.Action("Index", "Subscription")">Payments</a></li>
+
+                </ul>
+            </li>
+            }
+            else
+            {
+
+                <li class="">
+                    <a href="#"><i class="fa fa-gear"></i> <span class="nav-label">Admin Settings</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+
+                        <li class=""><a href="@Url.Action("Index", "Admin")">Add Company</a></li>
+                        <li class=""><a href="@Url.Action("CompanyList", "Admin")">View Company</a></li>
+                    </ul>
+                </li>
+            }
+
+      
+        </ul>
+    </div>
+</nav>

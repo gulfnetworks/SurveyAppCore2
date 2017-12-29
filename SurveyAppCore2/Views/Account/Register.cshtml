@@ -1,0 +1,548 @@
+﻿
+
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+
+
+@model UserDetailViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Log in";
+}
+
+
+@*<div class="container-fluid">
+        <div class="row">
+            <h2>@ViewData["Title"]</h2>
+            <div class="col-md-4">
+                <section>
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <h4>Use a local account to log in.</h4>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Log in</button>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <a asp-action="ForgotPassword">Forgot your password?</a>
+                            </p>
+                            <p>
+                                <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                            </p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+        </div>
+    </div>*@
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>User Management</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li>
+                <span>Users</span>
+            </li>
+            <li class="active">
+                <strong>Add User</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>User Detail </h5>
+
+                </div>
+                <div class="ibox-content">
+                    <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]"  class="form-horizontal" asp-action="Register"  asp-controller="Account">
+            
+     
+                            <div asp-validation-summary="All" class="text-danger form-group"></div>
+               
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name (*):</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control"  id="UserFirstName"  name="UserFirstName"> <small class="help-block m-b-none">Given Name, e.g., David, Ah Koon, Arindam, Muhammad. If applicable, middle names should be placed here, e.g., 'Christopher Ah Kow', 'Barack Muhammad'</small>
+                            </div>
+                        </div>
+  
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" >Last Name (*):</label>
+                            <div class="col-sm-10"><input type="text" id="UserLastName" name="UserLastName"  class="form-control" ><small class="help-block m-b-none">Surname, Family Name, e.g., 'Tan', 'Ong', 'Lee' . Include prefixes 'bin', 'binte', 'd/o', 's/o' here for Muslim and Indian names, e.g., 'bin Laden', 's/o Jayakumar'. Leave blank for cultures without Surnames.</small>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" >Mobile Number:</label>
+                            <div class="col-sm-10"><input type="text" id="MobileNo"  name="MobileNo" class="form-control"><small class="help-block m-b-none">Mobile number. Use + for country code, e.g., +65 12345678 for Singapore, +86 1234567890 for China</small>
+                            </div>
+                        </div>
+
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Active:</label>
+              
+                            <div class="col-sm-10"><div class="checkbox"><label> <input type="checkbox" id="Active" name="Active" value="1"  checked> </label></div>
+
+                            <small class="help-block m-b-none">Defaults to Active. Inactive users cannot login to system</small>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Jobtitle (*):</label>
+                            <div class="col-sm-10">
+                                <select  class="selectpicker"  name="JobTitleId" id="JobTitleId">
+                                    <option data-subtext="(No Jobtitle)" value="0">None</option>
+                                    <option data-divider="true"></option>
+                                </select>
+                    
+
+                                <small class="help-block m-b-none">Position. Modifiable only by user's superior.</small>
+                                <span asp-validation-for="JobTitleId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Manager (*):</label>
+                            <div class="col-sm-10">
+    
+
+                                <select class="selectpicker" data-container="body" id="ManagerId" name="ManagerId">
+                                    <option data-subtext="(No Manager)" value="0">None</option>
+
+                                </select>
+                            <small class="help-block m-b-none">Person whom this user reports to, a.k.a., commanding officer (CO). Modifiable only by user's superior.</small>
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Outlet (*):</label>
+                            <div class="col-sm-10">
+
+                                <select class="selectpicker" data-container="body" id="OutletId" name="OutletId">
+                                    <option data-subtext="(No Primary Outlet)" value="0">None</option>
+
+                                </select>>
+                            
+                            
+                            <small class="help-block m-b-none">Primary work-location of this user. A staff/manager will be listed in the manager/staff choices of the survey if his/her outlet is a public outlet. Modifiable only by user's superior.</small>
+                            </div>
+                        </div>
+
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Extra outlets:</label>
+                            <div class="col-sm-10">
+                
+                                <select class="selectpicker" multiple data-selected-text-format="count > 3" data-container="body" id="ExtraOutletId2" name="ExtraOutletId2">
+                                    <option data-subtext="" value="noPrimaryOutlet">Select All</option>
+                                </select>
+                            
+                            <small class="help-block m-b-none">Optional list of extra outlets for viewing reports and management. Users whose extra_outlets matches the survey selected outlet will show up in the drop-down list. Managers can view reports for 1) his outlet, 2) outlets of all his subordinates (both direct subordinates and descendents), and 3) outlets listed in his extra outlets. Condition 2 already allows senior management to view all reports, and thus adding extra_outlets is unnecessary. However, if a manager/staff is working shifts across multiple outlets, these outlets should be listed in extra_outlets for his name to show up on the survey list of managers/staff. Modifiable only by user's superior. Hold down "Control", or "Command" on a Mac, to select more than one.</small>
+                                <span asp-validation-for="ExtraOutletId" class="text-danger"></span>
+                            
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subscriptions:</label>
+                            <div class="col-sm-10">
+                                
+                                <select class="selectpicker" data-container="body" name="SubscriptionId" id="SubscriptionId">
+                                    <option data-subtext="(No Subscription)" value="0">None</option>
+                                    <option data-divider="true"></option>
+                                </select>
+                            
+                            
+                            <small class="help-block m-b-none">Optional subscribtion to outlet-specific alerts. By default, staff, manager, and manager's manager for a triggered survey will always receive alerts or resolution updates. Any other subscriber will only receive notifications on alerts/resolutions for outlets that he or she manages (directly via his outlet, extra_outlets, and recusively through all his/her subordinates.) Hold down "Control", or "Command" on a Mac, to select more than one.</small>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="col-lg-2 control-label"> Username (*): </label>
+                            <div class="col-lg-10">
+
+                                <input asp-for="Email" class="form-control" placeholder="sample@companymail.com" /> <small class="help-block m-b-none"> In the event that the user forgets his/her password, a new password will be generated and emailed to the user. Password reset works only if the user has a UNIQUE email address.</small>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+   
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                           <label asp-for="Password" class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+
+                             
+                                <input asp-for="Password" class="form-control" /><small class="help-block m-b-none">Set new password.</small>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                 
+                                <label asp-for="ConfirmPassword"  class="col-sm-2 control-label"></label>
+                    
+                            <div class="col-sm-10">
+                               
+                                <input asp-for="ConfirmPassword" class="form-control" /><small class="help-block m-b-none">Enter the same password as above.</small>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-sm btn-primary btn-block">Create User</button>
+                            </div>
+                        </div>
+
+            
+
+                        <input type="hidden" id="SettingsId" name="SettingsId" value="1">
+                        <input type="hidden"  id="ExtraOutletId" name="ExtraOutletId" value="">
+                        <input type="hidden" id="selectedExtraOutlet" name="selectedExtraOutlet" value="">
+                    </form>
+
+
+
+
+            
+         
+                    @section Scripts {
+                        @await Html.PartialAsync("_ValidationScriptsPartial")
+                   
+                    <script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+                    <script type="text/javascript">
+
+     
+                               function GetAllSubscription() {
+                                   $.ajax({
+                                       url: "/api/GetAllSubscription",
+                                       type: "GET",
+                                       contentType: "application/json",
+                                       success: function (data) {
+                                           var tempHtml = '';
+                                           //jobTitleId: 1, jobTitleDesc:
+                                           for (var i = 0; i < data.length; i++) {
+                                               tempHtml = tempHtml + '<option value="' + data[i].subscriptionId + '" selected>' + data[i].subscriptionName + "</option>";
+
+                                           }
+
+                                           $("#SubscriptionId").append(tempHtml);
+                                           $("#SubscriptionId").selectpicker("refresh");
+                                       }
+                                   });
+
+
+
+
+                               }
+
+                               function GetAllJobTitle() {
+                                    $.ajax({
+                                        url: "/api/GetAllJobTitle",
+                                        type: "GET",
+                                        contentType: "application/json",
+                                        success: function (data) {
+                                            var tempHtml = '';
+                                            //jobTitleId: 1, jobTitleDesc:
+                                            for (var i = 0; i < data.length; i++) {
+                                                tempHtml = tempHtml + '<option value="' + data[i].jobTitleId + '">' + data[i].jobTitleDesc + "</option>";
+
+                                            }
+
+                                            $("#JobTitleId").append(tempHtml);
+                                            $("#JobTitleId").selectpicker("refresh");
+                                        }
+                                    });
+
+                               }
+
+                               function GetAllOutlet() {
+                                   $.ajax({
+                                       url: "/api/GetAllOutlet",
+                                       type: "GET",
+                                       contentType: "application/json",
+                                       success: function (data) {
+                                           var tempHtml = '';
+                                           var curCountry = '';
+
+                                           for (var i = 0; i < data.length; i++) {
+                                               if (curCountry == '') {
+                                                   curCountry = data[i].outletCountry;
+                                                   tempHtml = tempHtml + '  <optgroup label="' + curCountry + '">'
+                                               }
+
+                                               if (curCountry != data[i].outletCountry ) {
+                                                   curCountry = data[i].outletCountry;
+                                                   tempHtml = tempHtml + '</optgroup><optgroup label="' + curCountry + '">';
+
+                                               }
+
+                                               tempHtml = tempHtml + '<option value="' + data[i].outletId + '" data-subtext="' + curCountry + '">' + data[i].outletName + "</option>";
+
+                                           }
+
+                                           tempHtml = tempHtml + "</optgroup>";
+
+                                           $("#OutletId").append(tempHtml);
+                                           $("#OutletId").selectpicker("refresh");
+
+                                           $("#ExtraOutletId2").append(tempHtml);
+                                           $("#ExtraOutletId2").selectpicker("refresh");
+
+                                           //$('#ExtraOutletId').on('changed.bs.select', function (e) {
+
+                                           //    alert(e.target.value);
+
+                                           //    if ($(this).selectpicker('val').indexOf("None") > -1) {
+                                           //         //$(this).selectpicker('deselectAll');
+                                           //         //$('#ExtraOutletId').selectpicker('val', [0]);
+
+                                           //    }
+                                           //});
+
+                                           $("#selectedExtraOutlet").val("0");
+
+
+                                           $('#ExtraOutletId2').on('change', function () {
+
+
+
+                                               if ($(this).selectpicker('val').indexOf("noPrimaryOutlet") > -1) {
+                                                   if ($("#selectedExtraOutlet").val() == "0") {
+                                                            $('#ExtraOutletId2').selectpicker('selectAll');
+
+
+
+
+                                                           $("#selectedExtraOutlet").val("1");
+                                                           $("#selectedExtraOutletCount").val($(this).selectpicker('val').length);
+                                                   }
+                                                   else {
+
+
+
+                                                       var y = $(this).selectpicker('val');
+                                                       y = jQuery.grep(y, function (value) {
+                                                           return value != "noPrimaryOutlet";
+                                                       });
+                                                       $(this).selectpicker('val',y);
+
+                                                       $("#selectedExtraOutlet").val("0");
+                                                   }
+
+
+                                               }
+                                               else {
+                                                   if ($("#selectedExtraOutlet").val() == "1") {
+                                                       $('#ExtraOutletId2').selectpicker('deselectAll');
+
+
+                                                   }
+
+                                                   $("#selectedExtraOutlet").val("0");
+                                               }
+
+                   
+
+                                               var arr = $('#ExtraOutletId2').selectpicker('val');
+                                               arr = jQuery.grep(arr, function (value) {
+                                                   return value != "noPrimaryOutlet";
+                                               });
+
+                                               if (arr.length > 0) {
+                                                   $("#ExtraOutletId").val(arr.join(", "));
+
+                                               }
+                                               else {
+                                                   $("#ExtraOutletId").val(0);
+
+                                               }
+                                           });
+                                       }
+                                   });
+
+                               }
+
+                               function GetAllManager() {
+                                   $.ajax({
+                                       url: "/api/GetAllManager",
+                                       type: "GET",
+                                       contentType: "application/json",
+                                       success: function (data) {
+                                           var tempHtml = '';
+                                           var curOutlet = '';
+                                           //jobTitleId: 1, jobTitleDesc:
+                                           for (var i = 0; i < data.length; i++) {
+                                               if (curOutlet == '') {
+                                                   curOutlet = data[i].outletCountry + ": " + data[i].outletName;
+                                                   tempHtml = tempHtml + '  <optgroup label="' + curOutlet + '">'
+                                               }
+
+                                               if (curOutlet != data[i].outletCountry + ": " + data[i].outletName) {
+                                                   curOutlet = data[i].outletCountry + ": " + data[i].outletName
+                                                   tempHtml = tempHtml + '</optgroup><optgroup label="' + curOutlet + '">'
+
+                                               }
+
+                                               tempHtml = tempHtml + '<option value="' + data[i].userDetailId + '" data-subtext="' + data[i].jobTitleDesc + '">' + data[i].userFirstName + " "+  data[i].userLastName + "</option>";
+
+                                           }
+
+                                           tempHtml = tempHtml + "</optgroup>";
+
+                                           $("#ManagerId").append(tempHtml);
+                                           $("#ManagerId").selectpicker("refresh");
+                                       }
+                                   });
+
+                               }
+
+                               GetAllJobTitle();
+                               GetAllManager();
+                               GetAllOutlet();
+                               GetAllSubscription();
+
+
+
+
+                               $(document).ready(function () {
+
+                                   
+
+                                       $('#Active').on('change', function () {
+                                           if ($(this).prop("checked")) {
+
+                                               $(this).val(1);
+                                           }
+                                           else
+                                           {
+                                               $(this).val(0);
+
+                                           }
+                                          
+                                       });
+
+
+                                   });
+                    </script>
+
+               
+                    }
+
+                    @section Styles {
+
+                        <link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+                        <style>
+
+                        </style>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox-content ibox-content2">
+                <h2 class="font-bold">
+                    Create a new account
+                </h2><br />
+
+
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+
+                    <p class="text-muted text-center">
+                        <small>Already have an account?</small>
+                    </p>
+
+                    <a class="btn btn-sm btn-white btn-block" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Sign In</a>
+                </form>
+
+                @section Scripts {
+                    @await Html.PartialAsync("_ValidationScriptsPartial")
+                }
+
+
+                <p class="m-t">
+                    <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>*@
+
+

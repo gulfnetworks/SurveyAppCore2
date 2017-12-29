@@ -1,0 +1,843 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+    ViewData["Title"] = "GeneralSurvey" + ViewData["LastSurveyId"];
+}
+<div class="wrapper wrapper-content">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox float-e-margins borderX">
+                <div class="ibox-title">
+                    <h3>General Survey</h3>
+
+                </div>
+                <div class="ibox-content ibox-heading">
+                    <h3>VALUE</h3>
+                    <small> PLEASE RATE OUR VALUE ON A SCALE OF 1 (POOR) TO 10 (EXCELLENT) (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="">
+
+
+
+                        <div class="form-group" id="valueGroup">
+                            <label class="col-sm-2 control-label">Recommended</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optValue1" name="optionsRadios">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" id="optValue2" name="optionsRadios">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optValue3" name="optionsRadios">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" id="optValue4" name="optionsRadios">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" id="optValue5" name="optionsRadios">5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optValue6" name="optionsRadios">6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7" id="optValue7" name="optionsRadios">7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8" id="optValue8" name="optionsRadios">8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9" id="optValue9" name="optionsRadios">9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10" id="optValue10" name="optionsRadios">10
+                                </label>
+                            </div>
+                        </div>
+               
+                        <div class="form-group" id="validationValue">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger" >REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="hr-line-dashed hidden valueText1"></div>
+                        <div class="hr-line-dashed hidden valueText2"></div>
+                        <div class="form-group valueText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">  We are so sorry, please let us know how we can offer a better value for your next visit?</div>
+
+                        </div>
+                        <div class="form-group valueText1 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtValue1" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                        <div class="form-group valueText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">  How can we offer you a better value for your next visit?</div>
+
+                        </div>
+                        <div class="form-group valueText2 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtValue2" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                    </form>
+
+                </div>
+              
+                <div class="ibox-content ibox-heading">
+                    <h3>QUALITY</h3>
+                    <small> PLEASE RATE OUR QUALITY ON A SCALE OF 1 (POOR) TO 10 (EXCELLENT): (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="">
+
+
+
+                        <div class="form-group" id="qualityGroup">
+                            <label class="col-sm-2 control-label">Recommended</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optQuality1" name="optionsRadios">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" id="optQuality2" name="optionsRadios">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optQuality3" name="optionsRadios">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" id="optQuality4" name="optionsRadios">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" id="optQuality5" name="optionsRadios">5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optQuality6" name="optionsRadios">6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7" id="optQuality7" name="optionsRadios">7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8" id="optQuality8" name="optionsRadios">8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9" id="optQuality9" name="optionsRadios">9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10" id="optQuality10" name="optionsRadios">10
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="validationQuality">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger">REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="hr-line-dashed hidden qualityText1"></div>
+                        <div class="hr-line-dashed hidden qualityText2"></div>
+                        <div class="form-group qualityText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8"> We are sorry to disappoint you. Please let us know how we can improve the quality of our items for your next visit.</div>
+
+                        </div>
+                        <div class="form-group qualityText1 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtQuality1" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                        <div class="form-group qualityText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">  Please tell us how we can improve the quality of our food?</div>
+
+                        </div>
+                        <div class="form-group qualityText2 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtQuality2" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+                
+
+
+                <div class="ibox-content ibox-heading">
+                    <h3>SERVICE</h3>
+                    <small> PLEASE RATE OUR SERVICE ON A SCALE OF 1 (POOR) TO 10 (EXCELLENT) (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="">
+
+
+
+                        <div class="form-group" id="serviceGroup">
+                            <label class="col-sm-2 control-label">Recommended</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optService1" name="optionsRadios">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" id="optService2" name="optionsRadios">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optService3" name="optionsRadios">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" id="optService4" name="optionsRadios">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" id="optService5" name="optionsRadios">5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optService6" name="optionsRadios">6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7" id="optService7" name="optionsRadios">7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8" id="optService8" name="optionsRadios">8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9" id="optService9" name="optionsRadios">9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10" id="optService10" name="optionsRadios">10
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="validationService">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger">REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+                        <div class="hr-line-dashed hidden serviceText1"></div>
+                        <div class="hr-line-dashed hidden serviceText2"></div>
+                        <div class="form-group serviceText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8"> We are so sorry to disappoint you. Please let us know what went wrong and how we can serve you better on your next visit.</div>
+
+                        </div>
+                        <div class="form-group serviceText1 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtService1" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                        <div class="form-group serviceText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">  Please share with us on how we can improve our service?</div>
+
+                        </div>
+                        <div class="form-group serviceText2 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtService2" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+                    </form>
+
+                </div>
+  
+
+
+
+                <div class="ibox-content ibox-heading">
+                    <h3>AMBIENCE</h3>
+                    <small> PLEASE RATE OUR AMBIENCE ON A SCALE OF 1 (POOR) TO 10 (EXCELLENT): (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="">
+
+
+
+                        <div class="form-group" id="ambienceGroup">
+                            <label class="col-sm-2 control-label">Recommended</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optAmbience1" name="optionsRadios">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" id="optAmbience2" name="optionsRadios">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optAmbience3" name="optionsRadios">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" id="optAmbience4" name="optionsRadios">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" id="optAmbience5" name="optionsRadios">5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optAmbience6" name="optionsRadios">6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7" id="optAmbience7" name="optionsRadios">7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8" id="optAmbience8" name="optionsRadios">8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9" id="optAmbience9" name="optionsRadios">9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10" id="optAmbience10" name="optionsRadios">10
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="validationAmbience">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger">REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="hr-line-dashed hidden ambienceText1"></div>
+                        <div class="hr-line-dashed hidden ambienceText2"></div>
+                        <div class="form-group ambienceText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">We are so sorry that you are disappointed with the ambience of our outlet. Please let us know how we can correct the ambience and not repeat the mistake on your next visit.</div>
+
+                        </div>
+                        <div class="form-group ambienceText1 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtAmbience1" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                        <div class="form-group ambienceText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">  Please share with us how we can improve the ambience?</div>
+
+                        </div>
+                        <div class="form-group ambienceText2 hidden">
+
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtAmbience2" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+                <div class="ibox-content ibox-heading">
+                    <h3>YOUR MOST RECENT VISIT</h3>
+                    <small> WHEN WAS YOUR LAST VISIT TO OUR RESTAURANT? (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="">
+
+
+
+                        <div class="form-group" id="visitGroup">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="0" id="optVisit0" name="optionsRadios">NEVER
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optVisit1" name="optionsRadios">1 MONTH
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optVisit2" name="optionsRadios">3 MONTHS
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optVisit3" name="optionsRadios"> 6 MONTHS
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value=">6" id="optVisit4" name="optionsRadios">> 6 MONTHS
+                                </label>
+                   
+                                <br/>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="validationVisit">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger">REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+
+                <div class="ibox-content ibox-heading">
+                    <h3>RECOMMEND</h3>
+                    <small> ON A SCALE OF 1 (LEAST LIKELY) TO 10 (MOST LIKELY), WOULD YOU RECOMMEND US TO YOUR FRIENDS? (*)</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" action="@Url.Action("ThankYou", "Surveys")">
+                        <div class="form-group" id="recommendGroup">
+                            <label class="col-sm-2 control-label">Recommended</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" value="1" id="optRecommend1" name="optionsRadios">1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2" id="optRecommend2" name="optionsRadios">2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3" id="optRecommend3" name="optionsRadios">3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4" id="optRecommend4" name="optionsRadios">4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5" id="optRecommend5" name="optionsRadios">5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6" id="optRecommend6" name="optionsRadios">6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7" id="optRecommend7" name="optionsRadios">7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8" id="optRecommend8" name="optionsRadios">8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9" id="optRecommend9" name="optionsRadios">9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10" id="optRecommend10" name="optionsRadios">10
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="validationRecommend">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <span class="text-danger">REQUIRED. PLEASE ANSWER.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="hr-line-dashed recommendText1 hidden"></div>
+                        <div class="form-group recommendText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                Are there any areas that did not meet your expectations?
+                            </div>
+
+                        </div>
+                        <div class="form-group recommendText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtRecommendPoorArea" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+
+
+
+                        <div class="hr-line-dashed rrecommendText1 hidden"></div>
+                        <div class="form-group recommendText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">
+                      
+                                How can we improve to better serve you for your next visit?
+                            </div>
+                        </div>
+                        <div class="form-group recommendText1 hidden">
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtRecommendImprovements" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+                        <div class="hr-line-dashed recommendText2 hidden"></div>
+                        <div class="form-group recommendText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-8">
+                              
+                                Are there any suggestions for us to serve you better?
+                            </div>
+                        </div>
+
+                        <div class="form-group recommendText2 hidden">
+                            <div class="col-sm-offset-2 col-sm-6"><textarea type="text" id="txtRecommendSuggestion" class="form-control" cols="40" rows="2"></textarea></div>
+                        </div>
+
+
+
+                       <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a class="btn btn-primary" href="#" id="btnSubmit" ><i class="fa fa-send"></i>&nbsp;Submit</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<environment names="Development,Staging,Production">
+    <style>
+        .radio-inline {
+            min-width: 35px;
+        }
+    </style>
+</environment>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        function toProperCase(text) {
+            return text.toUpperCase().substr(0, 1) + text.toLowerCase().substr(1, $(this).len);
+        }
+        // new code2
+        function SendThankYouEmail(settingsId,email) {
+  
+            var tmpObject = {
+                "SettingsId": 0
+                , "Email": ''
+
+            }
+            tmpObject.SettingsId = parseInt(settingsId);
+            tmpObject.Email = email;
+
+
+            $.ajax({
+                url: '/api/SendThankyouEmail',
+                type: "POST",
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(tmpObject),
+                success: function (data) {
+                       if (typeof window != 'undefined') {
+
+                        window.location.href = "/Surveys/ThankYou?Code=@ViewData["Code"]&Company=@ViewData["Company"]";
+
+                    }
+                    else {
+
+                        document.location.href = "/Surveys/ThankYou?Code=@ViewData["Code"]&Company=@ViewData["Company"]";
+                    }
+                }
+            });
+
+        }
+
+        function SaveSurvey() {
+            $("#validationValue").hide();
+            $("#validationQuality").hide();
+            $("#validationVisit").hide();
+            $("#validationAmbience").hide();
+            $("#validationService").hide();
+            $("#validationRecommend").hide();
+            var id = parseInt(@ViewData["LastSurveyId"]);
+
+            var SurveyObject = {
+                "SurveyId": id
+                        ,"QualityRate": ''
+                        ,"QualityComment": ''
+                        ,"ValueRate": 0
+                        ,"ValueComment": ''
+                        , "ServiceRate": 0
+                        ,"ServiceComment": ''
+                        , "AmbienceRate": 0
+                        ,"AmbienceComment": ''
+                        , "RecommendRate": 0
+                        ,"RecommendPoorArea": ''
+                        , "RecommendImprovements": ''
+                        , "RecommendSuggestions": ''
+                        , "Status": ''
+                        ,"Action" : ''
+
+            }
+
+
+
+
+
+
+            isValid = false;
+            //SET VALUE ==========================================================================
+            $('#valueGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.ValueRate = $(this).val();
+                    if ($(this).val() > 4) { SurveyObject.ValueComment = $("#txtValue2").val(); }
+                    else { SurveyObject.ValueComment = $("#txtValue1").val(); }
+                    isValid = true;
+
+                }
+            });
+
+
+
+
+            if (!isValid) {
+                $("#validationValue").show();
+
+                $(window).scrollTop($("#valueGroup").offset().top - 100);
+                return;
+            }
+
+
+            isValid = false;
+            //SET QUALITY ==========================================================================
+            $('#qualityGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.QualityRate = $(this).val();
+                    if ($(this).val() > 4) { SurveyObject.QualityComment = $("#txtQuality2").val(); }
+                    else { SurveyObject.QualityComment = $("#txtQuality1").val(); }
+                    isValid = true;
+                }
+            });
+            //if (!isValid) { $("#validationQuality").show(); return; }
+
+            if (!isValid) {
+                $("#validationQuality").show();
+                $(window).scrollTop($("#qualityGroup").offset().top - 100);
+                return;
+            }
+
+
+
+            isValid = false;
+            //SET SERVICE ==========================================================================
+            $('#serviceGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.ServiceRate = $(this).val();
+                    if ($(this).val() > 4) { SurveyObject.ServiceComment = $("#txtService2").val(); }
+                    else { SurveyObject.ServiceComment = $("#txtService1").val(); }
+                    isValid = true;
+
+                }
+            });
+
+
+            //if (!isValid) { $("#validationService").show(); return; }
+
+            if (!isValid) {
+                $("#validationService").show();
+                $(window).scrollTop($("#serviceGroup").offset().top - 100);
+                return;
+            }
+
+
+
+             isValid = false;
+
+            //SET AMBIENCE =======================================================================
+            $('#ambienceGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.AmbienceRate = $(this).val();
+                    if ($(this).val() > 4) { SurveyObject.AmbienceComment = $("#txtAmbience2").val(); }
+                    else { SurveyObject.AmbienceComment = $("#txtAmbience1").val(); }
+                    isValid = true;
+
+                }
+            });
+
+
+
+            if (!isValid) {
+                $("#validationAmbience").show();
+                $(window).scrollTop($("#ambienceGroup").offset().top - 100);
+                return;
+            }
+
+
+
+            isValid = false;
+            //SET LAST VISIT ==========================================================================
+            $('#visitGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.LastVisitComment = $(this).text();
+                    if ($(this).val() == ">6") {
+                        SurveyObject.LastVisit = 99;
+                    } else {
+                        SurveyObject.LastVisit = $(this).val();
+                    }
+
+                    isValid = true;
+
+                }
+            });
+
+
+
+            if (!isValid) {
+                $("#validationVisit").show();
+                $(window).scrollTop($("#visitGroup").offset().top - 100);
+                return;
+            }
+
+            isValid = false;
+            //SET RECOMMEND ==========================================================================
+            $('#recommendGroup input:radio').each(function () {
+                if ($(this).prop("checked")) {
+                    SurveyObject.RecommendRate = $(this).val();
+                    SurveyObject.RecommendImprovements = $("#txtRecommendImprovements").val();
+                    SurveyObject.RecommendPoorArea = $("#txtRecommendPoorArea").val();
+                    SurveyObject.RecommendSuggestions = $("#txtRecommendSuggestion").val();
+                    isValid = true;
+
+                }
+            });
+
+
+
+
+            if (!isValid) {
+                $("#validationRecommend").show();
+                $(window).scrollTop($("#recommendGroup").offset().top - 100);
+                return;
+            }
+
+            if (SurveyObject.AmbienceRate < 5 ||
+                SurveyObject.QualityRate < 5 ||
+                SurveyObject.RecommendRate < 5 ||
+                SurveyObject.ServiceRate < 5 ||
+                SurveyObject.ValueRate < 5) {
+
+                SurveyObject.Status = 'Unresolved';
+            }
+            else {
+                SurveyObject.Status = 'Resolved';
+
+            }
+
+            SurveyObject.Action = '@ViewData["Code"]';
+
+            $.ajax({
+                type: "POST",
+                url: "/api/UpdateSurvey",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                //data: JSON.stringify({
+                //         "SurveyId": 100
+                //        , "QualityRate": 1
+                //        , "QualityComment": ''
+                //        , "ValueRate": 2
+                //        , "ValueComment": ''
+                //        , "ServiceRate": 3
+                //        , "ServiceComment": ''
+                //        , "AmbienceRate": 4
+                //        , "AmbienceComment": ''
+                //        , "RecommendRate": 5
+                //        , "RecommendPoorArea": ''
+                //        , "RecommendImprovements": ''
+                //}),
+
+                data: JSON.stringify(SurveyObject),
+
+                success: function (data) {
+                    var settingsId = data.split("|")[0];
+                    var email = data.split("|")[1];
+
+                    SendThankYouEmail(settingsId, email);
+
+
+
+
+
+                }
+            });
+        }
+
+
+
+
+
+
+        $(function () {
+
+            $("#btnNavLogin").attr("href", "/Account/Login?company=@ViewData["Code"]" );
+
+            $("#companyName").html("@ViewData["Company"]");
+
+
+            $("#validationValue").hide();
+            $("#validationQuality").hide();
+            $("#validationVisit").hide();
+            $("#validationAmbience").hide();
+            $("#validationService").hide();
+            $("#validationRecommend").hide();
+
+            $('#qualityGroup input:radio').on("change", function () {
+                $("#validationQuality").hide();
+            });
+
+
+            $('#ambienceGroup input:radio').on("change", function () {
+                $("#validationAmbience").hide();
+            });
+
+            $('#recommendGroup input:radio').on("change", function () {
+                $("#validationRecommend").hide();
+
+
+                if (parseInt($(this).val()) > 7) {
+                    $(".recommendText2").removeClass("hidden");
+                    $(".recommendText1").addClass("hidden");
+
+                } else {
+                    $(".recommendText1").removeClass("hidden");
+                    $(".recommendText2").addClass("hidden");
+                }
+
+            });
+            $('#visitGroup input:radio').on("change", function () {
+                $("#validationVisit").hide();
+            });
+
+
+            $('#serviceGroup input:radio').on("change", function () {
+                $("#validationService").hide();
+            });
+
+            $('#valueGroup input:radio').on("change", function () {
+                $("#validationValue").hide();
+            });
+
+            $("#btnSubmit").on("click",function (event) {
+                SaveSurvey();
+                event.preventDefault();
+             });
+
+
+
+            var arrayList = ["value", "service", "quality", "ambience", "visit"];
+
+            for (var a = 0; a < arrayList.length; a++) {
+
+
+                $("#" + arrayList[a] + "Group").change(function () {
+                    var oLen = 11;
+
+                    if (arrayList[a] == "visit") { oLen = 4;}
+
+                    for (var i = 1; i < 11; i++) {
+                        if ($("#opt" + toProperCase($(this).prop("id").replace("Group", "")) + i).prop("checked")) {
+                            var curVal = parseInt($("#opt" + toProperCase($(this).prop("id").replace("Group", "")) + i).val());
+                            var className = "." + $(this).prop("id").replace("Group", "");
+
+
+                                if (curVal > 4) {
+                                    $(className + "Text2").removeClass("hidden");
+                                    $(className + "Text1").addClass("hidden");
+
+                                } else {
+                                    $(className + "Text1").removeClass("hidden");
+                                    $(className + "Text2").addClass("hidden");
+                                }
+
+
+
+                        }
+
+
+                    }
+                });
+
+            }
+
+
+
+        });
+    </script>
+}

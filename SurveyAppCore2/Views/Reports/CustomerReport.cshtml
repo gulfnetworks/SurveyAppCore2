@@ -1,0 +1,485 @@
+﻿
+@{
+    ViewData["Title"] = "GeneralSurveyReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Customer Report</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li>
+                <a>Reports</a>
+            </li>
+            <li class="active">
+                <strong>Customer</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="ibox-content m-b-sm border-bottom">
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="country">Countries</label>
+                    <select name="country" id="country" class="form-control selectpicker">
+
+                        <option value="AE">United Arab Emirates</option>
+
+                        <option value="Bangladesh">Bangladesh</option>
+
+                        <option value="Brunei Darussalam">Brunei Darussalam</option>
+
+                        <option value="Indonesia">Indonesia</option>
+
+                        <option value="India">India</option>
+
+                        <option value="Japan">Japan</option>
+
+                        <option value="Sri Lanka">Sri Lanka</option>
+
+                        <option value="Myanmar">Myanmar</option>
+
+                        <option value="Maldives">Maldives</option>
+
+                        <option value="Malaysia">Malaysia</option>
+
+                        <option value="Oman">Oman</option>
+
+                        <option value="Qatar">Qatar</option>
+
+                        <option value="Singapore">Singapore</option>
+
+                        <option value="Thailand">Thailand</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="status">Outlet</label>
+                    <select class="selectpicker form-control" data-container="body" id="OutletId" name="OutletId" multiple data-actions-box="true" data-selected-text-format="count > 1"></select>
+                    <span class="text-danger field-validation-error hidden" data-valmsg-for="OutletId" data-valmsg-replace="true">The OutletId field is required.</span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="date_start">Date Start</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_start" type="text" class="form-control">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="date_end">Date End</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_end" type="text" class="form-control">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+     
+
+
+        <div class="hr-line-dashed"></div>
+        <div class="row">
+            <div class="col-sm-4">
+                @*<div class="form-group">
+
+                        <button type="button" class="btn btn-block btn-outline btn-primary"><i class="fa fa-file-o" style="margin-right:5px;"></i>GENERATE REPORT</button>
+                    </div>*@
+                <div class="form-group">
+
+                    <button type="button" class="btn btn-w-m btn-primary" id="btnGenerateReport">Generate Report</button>
+                    <a href="#" id="export" role='button' class="btn  btn-w-m btn-white">
+                        Download All
+                    </a>
+                    @*<button type="button" class="btn  btn-w-m btn-white">Download All</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Processed <span id="totalResult"> </span> results in <span id="totalSeconds"> </span></h5>
+
+
+                    <div class="ibox-tools">
+
+
+
+
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="tableContainer">
+                    @*<table  id="tableResult" data-show-toggle="false" data-expand-first="true" class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                            <thead>
+                                <tr>
+                                    <th class="footable-first-column" data-sort-ignore="true">No</th>
+                                    <th   data-hide="phone"  data-title="Date (UTC)">Date (UTC)</th>
+                                    <th data-hide="phone"   data-title="Time (UTC)">Time (UTC)</th>
+                                    <th>Customer</th>
+                                    <th data-hide="all"    data-title="Mobile">Mobile</th>
+                                    <th data-hide="all"   data-title="Email">Email</th>
+                                    <th data-hide="all"  data-title="Check No">Check No.</th>
+                                    <th data-hide="all"   data-title="Country">Country</th>
+                                    <th data-hide="phone">Outlet</th>
+                                    <th  data-hide="phone,tablet"  data-title="Manager">Manager</th>
+                                    <th data-hide="phone">Staff</th>
+                                    <th data-hide="phone,tablet" title="Value" class="valueRateCol">V</th>
+                                    <th data-hide="phone,tablet" title="Quality" class="qualityRateCol">Q</th>
+                                    <th data-hide="phone,tablet" title="Service" class="serviceRateCol">S</th>
+                                    <th data-hide="phone,tablet" title="Ambience" class="ambienceRateCol">A</th>
+                                    <th data-hide="phone,tablet" class="avgCol">Overall (avg)</th>
+                                    <th data-hide="phone,tablet" title="recommendRateCol">R</th>
+                                    <th data-hide="phone,tablet" title="lvCol">LV</th>
+                                    <th data-hide="phone,tablet" title="Feedback">F</th>
+
+                                    <th>Status</th>
+                                    <th data-hide="all">Trigger</th>
+                                    <th class="text-right" data-sort-ignore="true">Action</th>
+                                    <th data-hide="all" data-title="Feedback">Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody id="generalSurveyResult">
+                                <tr id="noresult"><td colspan="22"  class="text-center" data-taggle="off"><span>No Result</span></td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="22">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/footable/css/footable.core.css" />
+        @*<link href="~/lib/footable/latest/css/footable.bootstrap.css" rel="stylesheet" />*@
+        <link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+        @*<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />*@
+
+        <style>
+            #noresult > td > span.footable-toggle {
+                display: none !important;
+            }
+
+            .footable.breakpoint > tbody > tr.footable-detail-show > td > span.footable-toggle:before {
+                content: "\e01f" !important;
+            }
+
+            .footable.breakpoint > tbody > tr > td > span.footable-toggle:before {
+                content: "\e021" !important;
+            }
+        </style>
+
+    </environment>
+
+}
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/footable/dist/footable.all.min.js"></script>
+        @*<script src="~/lib/footable/latest/js/footable.js"></script>*@
+        <script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+        @*<script src="~/lib/datetime-picker/js/bootstrap-datepicker.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/js/ExportToCSV.js"></script>
+    </environment>
+    <script type="text/javascript">
+        function GetAllOutletByCountry(country) {
+
+            $.ajax({
+                url: "/api/GetAllOutlet",
+                type: "GET",
+                contentType: "application/json",
+                success: function (data) {
+                    var tempHtml = '';
+
+
+
+                    for (var i = 0; i < data.length; i++) {
+                        if (country.toUpperCase() == data[i].outletCountry) {
+                            tempHtml = tempHtml + '<option value="' + data[i].outletId + '">' + data[i].outletName + "</option>";
+                        }
+                    }
+
+
+
+                    $("#OutletId").html(tempHtml);
+                    $("#OutletId").selectpicker("refresh");
+
+
+
+                }
+            });
+
+        }
+
+        function GetCurrentDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today =  yyyy + "-" + mm + "-" + dd;
+            return today;
+
+        }
+
+        function round(value, precision) {
+            var multiplier = Math.pow(10, precision || 0);
+            return Math.round(value * multiplier) / multiplier;
+        }
+
+
+        function CreateTable(tableContent) {
+            $("#tableResult").remove();
+            $('<table>').attr({ 'id': 'tableResult', 'class': 'footable table table-bordered table-stripped toggle-arrow-tiny"', 'data-page-size': '20', 'data-sorting': 'true' }).appendTo('#tableContainer');
+            $("#tableResult").append(
+               '<thead><tr>' +
+                    '<th class="footable-first-column" data-sort-ignore="true">No</th>' +
+                    '<th   data-hide="phone"  data-title="Date">Date</th>' +
+                    '<th>Customer</th>' +
+                    '<th data-hide="phone" data-title="Mobile">Mobile</th>' +
+                    '<th data-hide="phone" data-title="Email">Email</th>' +
+                    '<th data-hide="phone" data-title="Check No">Check No.</th>' +
+                    '<th data-hide="phone" data-title="Country">Country</th>' +
+                    '<th data-hide="phone">Outlet</th>' +
+                    '<th  data-hide="phone" data-title="Manager">Manager</th>' +
+                   '<th data-hide="phone">Number Of Visit</th>' +
+                    '<th data-title="" data-sort-ignore="true"></th>' +
+                '</tr></thead>');
+
+            if (tableContent == "") {
+                $("#tableResult").append('<tbody id="generalSurveyResult"><tr id="noresult"><td colspan="11"  class="text-center" data-taggle="off"><span>No Result</span></td></tr></tbody>');
+            }
+            else {
+
+                $("#tableResult").append('<tbody id="generalSurveyResult">' + tableContent + '</tbody>');
+            }
+
+            $("#tableResult").append('<tfoot><tr><td colspan="11"><ul class="pagination pull-right"></ul></td></tr></tfoot>');
+
+
+
+    
+
+       
+            $('.footable').footable();
+            $('.footable').trigger('footable_redraw');
+        }
+
+        function MilisecondsToMinuteSecond(ms) {
+            var min = 0 | (ms / 1000 / 60), sec = 0 | (ms / 1000) % 60;
+            return (min + ' minutes and ' + sec + ' seconds.');
+
+        }
+
+        function GetGeneralSurveyData() {
+
+
+            var start = new Date().getTime();
+
+
+            var GeneralSurveyObject = {
+                "country": '',
+                "outletId":0,
+                "DateStart": '',
+                "DateEnd":'',
+                "Segment":'',
+                "Type":"",
+                "Statuses":'',
+                "KPIS": ''
+            }
+
+
+
+
+            var xx = {
+                "OutletId": 0,
+                "DateStart": '',
+                "DateEnd": '',
+                "Segment": '',
+                "Type": '',
+                "Statuses": '',
+                "KPIS": ''
+            };
+
+
+
+            xx.DateEnd = $("#date_end").val();
+            xx.DateStart = $("#date_start").val();
+            xx.Segment = $("#segments").selectpicker("val").toString();
+            xx.OutletId = $("#OutletId").selectpicker("val").toString();
+   
+
+            $.ajax({
+                type: "POST",
+                url: "/api/GetCustomerReport",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+
+                data: JSON.stringify(xx),
+
+                success: function (data) {
+                    var tmpHtml = '';
+
+                    $("#totalResult").text(data.length);
+                    for (var i = 0; i < data.length; i++) {
+                        tmpHtml = tmpHtml + '<tr><td>' + (i + 1) + '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].utcDate + '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].customer+ '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].mobileNo + '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].email + '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].checkNo+ '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].outletCountry+ '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].outletName+ '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].manager + '</td>';
+                        tmpHtml = tmpHtml + '<td>' + data[i].numberOfVisit + '</td>';
+
+                        var tmpid = data[i].surveyId;
+
+                        tmpHtml = tmpHtml + '<td class="text-right">';
+                        tmpHtml = tmpHtml + '  <div class="btn-group">';
+                        tmpHtml = tmpHtml + '      <a href="/MailBox/ComposeEmail?Id=' + tmpid  + '"   target="_blank"  class="btn-white btn btn-xs">Send Promotion</a>';
+                        tmpHtml = tmpHtml + '  </div>';
+                        tmpHtml = tmpHtml + ' </td>';
+                        //tmpHtml = tmpHtml + '<td><small>' + feedbackContent + '</small></td></tr>';
+                    }
+
+                    if (tmpHtml == '') {
+                        tmpHtml = '<tr id="noresult"><td colspan="11"  class="text-center" data-taggle="off"><span>No Result</span></td></tr>';
+
+                    }
+
+
+
+
+                    CreateTable(tmpHtml);
+
+
+                    var end = new Date().getTime();
+                    $("#totalSeconds").text(MilisecondsToMinuteSecond(end - start));
+
+                    //$("#generalSurveyResult").html(tmpHtml);
+
+                    //$('.footable').trigger('footable_redraw');
+                }
+            });
+
+        }
+
+
+        $(document).ready(function () {
+
+
+            $('#date_start').val(GetCurrentDate()).datepicker({ autoclose: true, format: 'yyyy-mm-dd' }).on('changeDate', function (e) {
+
+                var startDt = $('#date_start').val();
+                var endDt = $('#date_end').val();
+
+                if ((new Date(startDt).getTime() > new Date(endDt).getTime())) {
+                    $('#date_end').val(startDt);
+                }
+
+
+            });
+
+            $('#date_end').val(GetCurrentDate()).datepicker({ autoclose: true, format: 'yyyy-mm-dd' }).on('changeDate', function (e) {
+
+                var startDt = $('#date_start').val();
+                var endDt = $('#date_end').val();
+
+                if (new Date(startDt).getTime() > new Date(endDt).getTime()) {
+                    $('#date_start').val(endDt);
+                }
+            });
+            CreateTable('');
+
+
+
+            $('#KPIS').selectpicker('selectAll');
+
+            $('#country').on('change', function () {
+                GetAllOutletByCountry($('#country').val());
+
+            });
+
+
+
+            $("#btnGenerateReport").on("click", function (event) {
+                GetGeneralSurveyData();
+                event.preventDefault();
+            });
+
+            GetGeneralSurveyData();
+
+            // This must be a hyperlink
+            $("#export").click(function (event) {
+                // var outputFile = 'export'
+                var outputFile = window.prompt("What do you want to name your output file (Note: This won't have any effect on Safari)") || 'export';
+                outputFile = outputFile.replace('.csv', '') + '.csv'
+
+                // CSV
+                exportTableToCSV.apply(this, [$('#tableResult'), outputFile]);
+
+                // IF CSV, don't do event.preventDefault() or return false
+                // We actually need this to be a typical hyperlink
+            });
+        });
+
+
+
+    </script>
+}
+
+
+
+

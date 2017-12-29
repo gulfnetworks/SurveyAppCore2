@@ -1,0 +1,76 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+
+@model VisitDetailViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+    ViewData["Title"] = "EmailView";
+}
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="ibox float-e-margins borderX">
+                <div class="ibox-title">
+                    <h3>Customer Details</h3>
+
+                </div>
+                <div class="ibox-content ibox-heading">
+                    <h3>Thank You for Visiting Manhattan Fish Market</h3>
+                    We hope you had a good time! Your dining experience is valuable to us. Share your experience with us! No thought is too fishy for us.</small>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" asp-action="CustomerDetail"  asp-controller="Surveys">
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">NAME</label>
+                            <div class="col-sm-8"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">EMAIL</label>
+                            <div class="col-sm-8"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="checkbox"><label> <input type="checkbox" value=""> SUBSCRIBE EMAIL TO NEWS AND DEAL </label></div>
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">MOBILE NO#</label>
+                            <div class="col-sm-8"><input type="text" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-send"></i>&nbsp;Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    <style>
+        #page-wrapper {
+            height: 100vh;
+            min-height: 366px !important;
+        }
+    </style>
+
+}

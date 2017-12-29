@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewData["Title"] = "ComposeEmail";
+}
+<div class="wrapper wrapper-content">
+    <div class="row">
+
+        <div class="col-lg-12 animated fadeInRight">
+            <div class="mail-box-header">
+ 
+                <h2>
+                    Thank You Email Message
+                </h2>
+            </div>
+            <div class="mail-box">
+
+                <div class="mail-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">From:</label>
+                            <div class="col-sm-10"><input id="txtFrom" type="text" class="form-control" value=""></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject:</label>
+                            <div class="col-sm-10"><input id="txtSubject" type="text" class="form-control" value=""></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="mail-text" style="height:auto">
+                    <div class="summernote">
+          
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="#" id="btnSendEmail" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-save"></i> Save</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Cancel</a>
+
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/summernote/summernote.css" />
+        <link rel="stylesheet" href="~/lib/summernote/summernote-bs3.css" />
+    </environment>
+}
+@section Scripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/summernote/summernote.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+
+
+
+        function SendEmail() {
+
+            var subject = $("#txtSubject").val();
+            var from = $("#txtFrom").val();
+            var emailId = '@ViewData["EmailId"]';
+            var settingsId = '@ViewData["SettingsId"]';
+
+            var Email = {
+                "EmailId": 0,
+                "Subject": '',
+                "From": '',
+                "To": '',
+                "CC":'',
+                "Folder": '',
+                "Content": '',
+                "IsRead": 0,
+                "AutoEmail": 0,
+                "SettingsId": 0,
+            }
+
+
+
+            Email.EmailId = emailId;
+            Email.Content = $('.summernote').summernote('code');
+            Email.From = from;
+            Email.Subject = subject;
+            Email.SettingsId = settingsId;
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/UpdateThankyouEmail",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+
+                data: JSON.stringify(Email),
+
+                success: function (data) {
+                    alert('Successully updated!');
+                }
+            });
+
+        }
+
+        function decodeEntities(encodedString) {
+            var textArea = document.createElement('textarea');
+            textArea.innerHTML = encodedString;
+            return textArea.value;
+        }
+
+        $(document).ready(function () {
+
+
+
+            var content = '@ViewData["Content"]';
+            var subject = '@ViewData["Subject"]';
+            var from = '@ViewData["From"]';
+
+
+            $(".summernote").html(decodeEntities(content));
+            $("#txtSubject").val(subject);
+            $("#txtFrom").val(from)
+
+            //$(".summernote").summernote("editor.insertNode", content);
+            //$('.summernote').summernote();
+            $('.summernote').summernote({
+                callbacks: {
+                    onImageUpload: function (files, editor, $editable) {
+                        var formData = new FormData();
+                        formData.append("file", files[0]);
+
+                        $.ajax({
+                            url: "/api/UploadImage",
+                            data: formData,
+                            type: 'POST',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (imageUrl) {
+
+                                if (!imageUrl) {
+
+                                    // handle error
+                                    alert(imageUrl);
+                                    return;
+                                }
+                                $('.summernote').summernote('editor.insertImage', imageUrl);
+
+                            },
+                            error: function () {
+
+                                // handle error
+                            }
+                        });
+                    }
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+            $("#btnSendEmail").on("click", function (e) {
+                SendEmail();
+                e.preventDefault();
+            });
+        });
+
+    </script>
+}

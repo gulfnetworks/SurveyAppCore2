@@ -1,0 +1,367 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "EmailView";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Settings</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li>
+                <a>Setting</a>
+            </li>
+            <li class="active">
+                <strong>Time</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="row hidden" id="successMsg">
+        <div class="col-lg-12 ">
+            <div class="alert alert-info">
+                <b>Message: </b>Successfully updated!
+            </div>
+        </div>
+    </div>
+    <div class="row hidden" id="errorMsg">
+        <div class="col-lg-12 ">
+            <div class="alert alert-danger">
+               <b>Message: </b>Update Settings failed.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Time Settings</h5>
+
+
+                    <div class="ibox-tools">
+
+
+
+
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="tableContainer">
+                    <div class="row">
+                        <div class="col-lg-12 " >
+                            <form  action="#" method="post" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Time Zone:</label>
+                                    <div class="col-sm-6">
+                                        <select name="timeZone" id="timeZone" class="form-control selectpicker">
+                                            <option value="Dateline Standard Time" data-subtext="(GMT-12:00) International Date Line West">Dateline Standard Time</option>
+                                            <option value="Samoa Standard Time" data-subtext="(GMT-11:00) Midway Island, Samoa">Samoa Standard Time</option>
+                                            <option value="Hawaiian Standard Time" data-subtext="(GMT-10:00) Hawaii">Hawaiian Standard Time</option>
+                                            <option value="Alaskan Standard Time" data-subtext="(GMT-09:00) Alaska">Alaskan Standard Time</option>
+                                            <option value="Pacific Standard Time" data-subtext="(GMT-08:00) Pacific Time (US and Canada); Tijuana">Pacific Standard Time</option>
+                                            <option value="Mountain Standard Time" data-subtext="(GMT-07:00) Mountain Time (US and Canada)">Mountain Standard Time</option>
+                                            <option value="Mexico Standard Time 2" data-subtext="(GMT-07:00) Chihuahua, La Paz, Mazatlan">Mexico Standard Time 2</option>
+                                            <option value="U.S. Mountain Standard Time" data-subtext="(GMT-07:00) Arizona">U.S. Mountain Standard Time</option>
+                                            <option value="Central Standard Time" data-subtext="(GMT-06:00) Central Time (US and Canada">Central Standard Time</option>
+                                            <option value="Canada Central Standard Time" data-subtext="(GMT-06:00) Saskatchewan">Canada Central Standard Time</option>
+                                            <option value="Mexico Standard Time" data-subtext="(GMT-06:00) Guadalajara, Mexico City, Monterrey">Mexico Standard Time</option>
+                                            <option value="Central America Standard Time" data-subtext="(GMT-06:00) Central America">Central America Standard Time</option>
+                                            <option value="Eastern Standard Time" data-subtext="(GMT-05:00) Eastern Time (US and Canada)">Eastern Standard Time</option>
+                                            <option value="U.S. Eastern Standard Time" data-subtext="(GMT-05:00) Indiana (East)">U.S. Eastern Standard Time</option>
+                                            <option value="S.A. Pacific Standard Time" data-subtext="(GMT-05:00) Bogota, Lima, Quito">S.A. Pacific Standard Time</option>
+                                            <option value="Atlantic Standard Time" data-subtext="(GMT-04:00) Atlantic Time (Canada)">Atlantic Standard Time</option>
+                                            <option value="S.A. Western Standard Time" data-subtext="(GMT-04:00) Caracas, La Paz">S.A. Western Standard Time</option>
+                                            <option value="Pacific S.A. Standard Time" data-subtext="(GMT-04:00) Santiago">Pacific S.A. Standard Time</option>
+                                            <option value="Newfoundland and Labrador Standard Time" data-subtext="(GMT-03:30) Newfoundland and Labrador">Newfoundland and Labrador Standard Time</option>
+                                            <option value="E. South America Standard Time" data-subtext="(GMT-03:00) Brasilia">E. South America Standard Time</option>
+                                            <option value="S.A. Eastern Standard Time" data-subtext="(GMT-03:00) Buenos Aires, Georgetown">S.A. Eastern Standard Time</option>
+                                            <option value="Greenland Standard Time" data-subtext="(GMT-03:00) Greenland">Greenland Standard Time</option>
+                                            <option value="Mid-Atlantic Standard Time" data-subtext="(GMT-02:00) Mid-Atlantic">Mid-Atlantic Standard Time</option>
+                                            <option value="Azores Standard Time" data-subtext="(GMT-01:00) Azores">Azores Standard Time</option>
+                                            <option value="Cape Verde Standard Time" data-subtext="(GMT-01:00) Cape Verde Islands">Cape Verde Standard Time</option>
+                                            <option value="GMT Standard Time" data-subtext="(GMT) Greenwich Mean Time: Dublin, Edinburgh, Lisbon, London" selected>GMT Standard Time</option>
+                                            <option value="Greenwich Standard Time" data-subtext="(GMT) Casablanca, Monrovia">Greenwich Standard Time</option>
+                                            <option value="Central Europe Standard Time" data-subtext="(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague">Central Europe Standard Time</option>
+                                            <option value="Central European Standard Time" data-subtext="(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb">Central European Standard Time</option>
+                                            <option value="Romance Standard Time" data-subtext="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris">Romance Standard Time</option>
+                                            <option value="W. Europe Standard Time" data-subtext="(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna">W. Europe Standard Time</option>
+                                            <option value="W. Central Africa Standard Time" data-subtext="(GMT+01:00) West Central Africa">W. Central Africa Standard Time</option>
+                                            <option value="E. Europe Standard Time" data-subtext="(GMT+02:00) Bucharest">E. Europe Standard Time</option>
+                                            <option value="Egypt Standard Time" data-subtext="(GMT+02:00) Cairo">Egypt Standard Time</option>
+                                            <option value="FLE Standard Time" data-subtext="(GMT+02:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius">FLE Standard Time</option>
+                                            <option value="GTB Standard Time" data-subtext="(GMT+02:00) Athens, Istanbul, Minsk">GTB Standard Time</option>
+                                            <option value="Israel Standard Time" data-subtext="(GMT+02:00) Jerusalem">Israel Standard Time</option>
+                                            <option value="South Africa Standard Time" data-subtext="(GMT+02:00) Harare, Pretoria">South Africa Standard Time</option>
+                                            <option value="Russian Standard Time" data-subtext="(GMT+03:00) Moscow, St. Petersburg, Volgograd">Russian Standard Time</option>
+                                            <option value="Arab Standard Time" data-subtext="(GMT+03:00) Kuwait, Riyadh">Arab Standard Time</option>
+                                            <option value="E. Africa Standard Time" data-subtext="(GMT+03:00) Nairobi">E. Africa Standard Time</option>
+                                            <option value="Arabic Standard Time" data-subtext="(GMT+03:00) Baghdad">Arabic Standard Time</option>
+                                            <option value="Iran Standard Time" data-subtext="(GMT+03:30) Tehran">Iran Standard Time</option>
+                                            <option value="Arabian Standard Time" data-subtext="(GMT+04:00) Abu Dhabi, Muscat">Arabian Standard Time</option>
+                                            <option value="Caucasus Standard Time" data-subtext="(GMT+04:00) Baku, Tbilisi, Yerevan">Caucasus Standard Time</option>
+                                            <option value="Transitional Islamic State of Afghanistan Standard Time" data-subtext="(GMT+04:30) Kabul">Transitional Islamic State of Afghanistan Standard Time</option>
+                                            <option value="Ekaterinburg Standard Time" data-subtext="(GMT+05:00) Ekaterinburg">Ekaterinburg Standard Time</option>
+                                            <option value="West Asia Standard Time" data-subtext="(GMT+05:00) Islamabad, Karachi, Tashkent">West Asia Standard Time</option>
+                                            <option value="India Standard Time" data-subtext="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi">India Standard Time</option>
+                                            <option value="Nepal Standard Time" data-subtext="(GMT+05:45) Kathmandu">Nepal Standard Time</option>
+                                            <option value="Central Asia Standard Time" data-subtext="(GMT+06:00) Astana, Dhaka">Central Asia Standard Time</option>
+                                            <option value="Sri Lanka Standard Time" data-subtext="(GMT+06:00) Sri Jayawardenepura">Sri Lanka Standard Time</option>
+                                            <option value="N. Central Asia Standard Time" data-subtext="(GMT+06:00) Almaty, Novosibirsk">N. Central Asia Standard Time</option>
+                                            <option value="Myanmar Standard Time" data-subtext="(GMT+06:30) Yangon Rangoon">Myanmar Standard Time</option>
+                                            <option value="S.E. Asia Standard Time" data-subtext="(GMT+07:00) Bangkok, Hanoi, Jakarta">S.E. Asia Standard Time</option>
+                                            <option value="North Asia Standard Time" data-subtext="(GMT+07:00) Krasnoyarsk">North Asia Standard Time</option>
+                                            <option value="China Standard Time" data-subtext="(GMT+08:00) Beijing, Chongqing, Hong Kong SAR, Urumqi">China Standard Time</option>
+                                            <option value="Singapore Standard Time" data-subtext="(GMT+08:00) Kuala Lumpur, Singapore">Singapore Standard Time</option>
+                                            <option value="Taipei Standard Time" data-subtext="(GMT+08:00) Taipei">Taipei Standard Time</option>
+                                            <option value="W. Australia Standard Time" data-subtext="(GMT+08:00) Perth">W. Australia Standard Time</option>
+                                            <option value="North Asia East Standard Time" data-subtext="(GMT+08:00) Irkutsk, Ulaanbaatar">North Asia East Standard Time</option>
+                                            <option value="Korea Standard Time" data-subtext="(GMT+09:00) Seoul">Korea Standard Time</option>
+                                            <option value="Tokyo Standard Time" data-subtext="(GMT+09:00) Osaka, Sapporo, Tokyo">Tokyo Standard Time</option>
+                                            <option value="Yakutsk Standard Time" data-subtext="(GMT+09:00) Yakutsk">Yakutsk Standard Time</option>
+                                            <option value="A.U.S. Central Standard Time" data-subtext="(GMT+09:30) Darwin">A.U.S. Central Standard Time</option>
+                                            <option value="Cen. Australia Standard Time" data-subtext="(GMT+09:30) Adelaide">Cen. Australia Standard Time</option>
+                                            <option value="A.U.S. Eastern Standard Time" data-subtext="(GMT+10:00) Canberra, Melbourne, Sydney">A.U.S. Eastern Standard Time</option>
+                                            <option value="E. Australia Standard Time" data-subtext="(GMT+10:00) Brisbane">E. Australia Standard Time</option>
+                                            <option value="Tasmania Standard Time" data-subtext="(GMT+10:00) Hobart">Tasmania Standard Time</option>
+                                            <option value="Vladivostok Standard Time" data-subtext="(GMT+10:00) Vladivostok">Vladivostok Standard Time</option>
+                                            <option value="West Pacific Standard Time" data-subtext="(GMT+10:00) Guam, Port Moresby">West Pacific Standard Time</option>
+                                            <option value="Central Pacific Standard Time" data-subtext="(GMT+11:00) Magadan, Solomon Islands, New Caledonia">Central Pacific Standard Time</option>
+                                            <option value="Fiji Islands Standard Time" data-subtext="(GMT+12:00) Fiji Islands, Kamchatka, Marshall Islands">Fiji Islands Standard Time</option>
+                                            <option value="New Zealand Standard Time" data-subtext="(GMT+12:00) Auckland, Wellington">New Zealand Standard Time</option>
+                                            <option value="Tonga Standard Time" data-subtext="(GMT+13:00) Nuku'alofa">Tonga Standard Time</option>
+
+                                        </select>
+                  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">System Time:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="curdate" id="curdate" class="form-control text-muted" disabled value="">
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <a class="btn btn-primary" href="#" id="btnSubmit">Save Settings</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+    <script type="text/javascript">
+        var GlobalVarTimeZone =
+         JSON.parse('[{ "id" :"Dateline Standard Time", "value":"-12:00" },' +
+         '{ "id" :"Samoa Standard Time", "value":"-11:00" },' +
+         '{ "id" :"Hawaiian Standard Time", "value":"-10:00" },' +
+         '{ "id" :"Alaskan Standard Time", "value":"-09:00" },' +
+         '{ "id" :"Pacific Standard Time", "value":"-08:00" },' +
+         '{ "id" :"Mountain Standard Time", "value":"-07:00" },' +
+         '{ "id" :"Mexico Standard Time 2", "value":"-07:00" },' +
+         '{ "id" :"U.S. Mountain Standard Time", "value":"-07:00" },' +
+         '{ "id" :"Central Standard Time", "value":"-06:00" },' +
+         '{ "id" :"Canada Central Standard Time", "value":"-06:00" },' +
+         '{ "id" :"Mexico Standard Time", "value":"-06:00" },' +
+         '{ "id" :"Central America Standard Time", "value":"-06:00" },' +
+         '{ "id" :"Eastern Standard Time", "value":"-05:00" },' +
+         '{ "id" :"U.S. Eastern Standard Time", "value":"-05:00" },' +
+         '{ "id" :"S.A. Pacific Standard Time", "value":"-05:00" },' +
+         '{ "id" :"Atlantic Standard Time", "value":"-04:00" },' +
+         '{ "id" :"S.A. Western Standard Time", "value":"-04:00" },' +
+         '{ "id" :"Pacific S.A. Standard Time", "value":"-04:00" },' +
+         '{ "id" :"Newfoundland and Labrador Standard Time", "value":"-03:30" },' +
+         '{ "id" :"E. South America Standard Time", "value":"-03:00" },' +
+         '{ "id" :"S.A. Eastern Standard Time", "value":"-03:00" },' +
+         '{ "id" :"Greenland Standard Time", "value":"-03:00" },' +
+         '{ "id" :"Mid-Atlantic Standard Time", "value":"-02:00" },' +
+         '{ "id" :"Azores Standard Time", "value":"-01:00" },' +
+         '{ "id" :"Cape Verde Standard Time", "value":"-01:00" },' +
+         '{ "id" :"GMT Standard Time", "value":"" },' +
+         '{ "id" :"Greenwich Standard Time", "value":"" },' +
+         '{ "id" :"Central Europe Standard Time", "value":"+01:00" },' +
+         '{ "id" :"Central European Standard Time", "value":"+01:00" },' +
+         '{ "id" :"Romance Standard Time", "value":"+01:00" },' +
+         '{ "id" :"W. Europe Standard Time", "value":"+01:00" },' +
+         '{ "id" :"W. Central Africa Standard Time", "value":"+01:00" },' +
+         '{ "id" :"E. Europe Standard Time", "value":"+02:00" },' +
+         '{ "id" :"Egypt Standard Time", "value":"+02:00" },' +
+         '{ "id" :"FLE Standard Time", "value":"+02:00" },' +
+         '{ "id" :"GTB Standard Time", "value":"+02:00" },' +
+         '{ "id" :"Israel Standard Time", "value":"+02:00" },' +
+         '{ "id" :"South Africa Standard Time", "value":"+02:00" },' +
+         '{ "id" :"Russian Standard Time", "value":"+03:00" },' +
+         '{ "id" :"Arab Standard Time", "value":"+03:00" },' +
+         '{ "id" :"E. Africa Standard Time", "value":"+03:00" },' +
+         '{ "id" :"Arabic Standard Time", "value":"+03:00" },' +
+         '{ "id" :"Iran Standard Time", "value":"+03:30" },' +
+         '{ "id" :"Arabian Standard Time", "value":"+04:00" },' +
+         '{ "id" :"Caucasus Standard Time", "value":"+04:00" },' +
+         '{ "id" :"Transitional Islamic State of Afghanistan Standard Time", "value":"+04:30" },' +
+         '{ "id" :"Ekaterinburg Standard Time", "value":"+05:00" },' +
+         '{ "id" :"West Asia Standard Time", "value":"+05:00" },' +
+         '{ "id" :"India Standard Time", "value":"+05:30" },' +
+         '{ "id" :"Nepal Standard Time", "value":"+05:45" },' +
+         '{ "id" :"Central Asia Standard Time", "value":"+06:00" },' +
+         '{ "id" :"Sri Lanka Standard Time", "value":"+06:00" },' +
+         '{ "id" :"N. Central Asia Standard Time", "value":"+06:00" },' +
+         '{ "id" :"Myanmar Standard Time", "value":"+06:30" },' +
+         '{ "id" :"S.E. Asia Standard Time", "value":"+07:00" },' +
+         '{ "id" :"North Asia Standard Time", "value":"+07:00" },' +
+         '{ "id" :"China Standard Time", "value":"+08:00" },' +
+         '{ "id" :"Singapore Standard Time", "value":"+08:00" },' +
+         '{ "id" :"Taipei Standard Time", "value":"+08:00" },' +
+         '{ "id" :"W. Australia Standard Time", "value":"+08:00" },' +
+         '{ "id" :"North Asia East Standard Time", "value":"+08:00" },' +
+         '{ "id" :"Korea Standard Time", "value":"+09:00" },' +
+         '{ "id" :"Tokyo Standard Time", "value":"+09:00" },' +
+         '{ "id" :"Yakutsk Standard Time", "value":"+09:00" },' +
+         '{ "id" :"A.U.S. Central Standard Time", "value":"+09:30" },' +
+         '{ "id" :"Cen. Australia Standard Time", "value":"+09:30" },' +
+         '{ "id" :"A.U.S. Eastern Standard Time", "value":"+10:00" },' +
+         '{ "id" :"E. Australia Standard Time", "value":"+10:00" },' +
+         '{ "id" :"Tasmania Standard Time", "value":"+10:00" },' +
+         '{ "id" :"Vladivostok Standard Time", "value":"+10:00" },' +
+         '{ "id" :"West Pacific Standard Time", "value":"+10:00" },' +
+         '{ "id" :"Central Pacific Standard Time", "value":"+11:00" },' +
+         '{ "id" :"Fiji Islands Standard Time", "value":"+12:00" },' +
+         '{ "id" :"New Zealand Standard Time", "value":"+12:00" },' +
+         '{ "id" :"Tonga Standard Time", "value":"+13:00)" }]');
+
+        function TimeZoneJSON(id) {
+
+            // iterate over each element in the array
+            for (var i = 0; i < GlobalVarTimeZone.length; i++) {
+                // look for the entry with a matching `code` value
+                if (GlobalVarTimeZone[i].id == id) {
+                    // we found it
+                    return (GlobalVarTimeZone[i].value);
+                }
+            }
+        }
+
+        function startTime() {
+            var offsetTime = TimeZoneJSON($('#timeZone').selectpicker("val"));
+
+            var offsetHours = (offsetTime == "" ? 0 : parseInt(offsetTime.split(':')[0]));
+            var offsetMinutes =  (offsetTime == "" ? 0 : parseInt(offsetTime.split(':')[1]));
+
+            var now = new Date();
+            var today = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds())
+            today.setHours(today.getHours() + offsetHours);
+            today.setMinutes(today.getMinutes() + offsetMinutes);
+
+
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+
+
+            $("#curdate").val(today.getFullYear() + '-' +
+                (today.getMonth() + 1) + '-' +
+                today.getDate() + ' ' +
+                 h + ":" + m + ":" + s);
+
+            var t = setTimeout(startTime, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+
+        function UpdateTimeZone() {
+            var jsonTZ = $("#timeZone").selectpicker("val");
+            $("#timeZone").selectpicker("val");
+            $("#successMsg").addClass("hidden");
+            $("#errorMsg").addClass("hidden");
+  
+            $.ajax({
+                type: "POST",
+                url: "/api/UpdateSettingsById",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(jsonTZ),
+                success: function (data) {
+                    $("#successMsg").removeClass("hidden");
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    $("#errorMsg").removeClass("hidden");
+                }
+            });
+        }
+
+    $(document).ready(function () {
+        var curTimeZone = '@ViewData["TimeZone"]';
+        if (curTimeZone == '') {
+
+            $("#timeZone").selectpicker("val", "GMT Standard Time");
+        }
+        else {
+       
+            $("#timeZone").selectpicker("val", curTimeZone);
+
+        }
+
+       
+        startTime();
+
+        
+        $("#btnSubmit").on("click", function () {
+            UpdateTimeZone();
+        });
+
+    });
+    </script>
+}
+
+@section Styles {
+
+    <link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+}
+
+
+

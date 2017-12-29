@@ -1,0 +1,134 @@
+﻿
+@{  
+    ViewData["Title"] = "CompanyList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Company List</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li>
+                <a>Company</a>
+            </li>
+            <li class="active">
+                <strong>View</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Company List</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <table class="footable table table-bordered table-stripped toggle-arrow-tiny" data-page-size="1000">
+                        <thead>
+                            <tr>
+                                <th class="text-nowrap">No#</th>
+                                <th  class="text-nowrap">TimeZone </th>
+                                <th  class="text-nowrap">Company</th>
+                                <th  class="text-nowrap">Address</th>
+                                <th  class="text-nowrap">Contact</th>
+                                <th  class="text-nowrap">LogoUrl</th>
+                                <th  class="text-nowrap">Country</th>
+                                <th  class="text-nowrap">Code</th>
+                                <th  class="text-nowrap">Opening Time</th>
+                                <th  class="text-nowrap">Closing Time</th>
+                                <th data-sort-ignore="true"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyListContent"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+
+    <script src="~/lib/footable/dist/footable.all.min.js"></script>
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+    <script type="text/javascript">
+
+        function GetManagerName(id, list) {
+            var curId = id;
+            var curList = list;
+            for (var a = 0; a < curList.length; a++) {
+                if (curId == curList[a].userDetailId) { return curList[a].userFirstName + ' ' + curList[a].userLastName; };
+            }
+            return "";
+        }
+
+        function GetAllUser() {
+            $.ajax({
+                url: "/api/GetAllCompany",
+                type: "GET",
+                contentType: "application/json",
+                success: function (data) {
+                    var tempHtml = '';
+
+
+                    for (var i = 0; i < data.length; i++) {
+
+
+                        tempHtml = tempHtml +  '<tr>'
+                            + '<td>' + (parseInt(i) + 1) + '</td>'
+                              + '<td>' + data[i].timeZone + '</td>'
+                        + '<td>'+data[i].companyName +'</td>'
+                        + '<td>'+data[i].companyAddress+'</td>'
+                        + '<td>'+data[i].companyContact+'</td>'
+                        + '<td>'+data[i].companyLogoUrl +'</td>'
+                        + '<td>'+data[i].country+'</td>'
+                        + '<td>'+data[i].companyCode+'</td>'
+                        + '<td>' +data[i].startTime+ '</td>'
+                            + '<td>' +data[i].endTime+ '</td>'
+                        + '<td><a href="/Admin/UpdateCompany?id=' + data[i].settingsId + '">Edit</a></td> </tr>';
+
+
+                    }
+
+
+
+                    $("#companyListContent").html(tempHtml);
+                    $('.footable').footable();
+                    $('.footable').trigger('footable_redraw');
+                }
+            });
+
+        }
+
+
+        $(document).ready(function () {
+            $('.footable').footable();
+            $('.footable').trigger('footable_redraw');
+            GetAllUser();
+        });
+    </script>
+
+
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/footable/css/footable.core.css" />
+    <link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <style>
+    </style>
+
+}

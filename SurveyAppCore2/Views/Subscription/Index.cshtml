@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "Payments";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Subscription Payments</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Subscription</a>
+            </li>
+            <li class="active">
+                <strong>Payments</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    Payment method
+                </div>
+                <div class="ibox-content">
+                    <div class="panel-group payments-method" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="pull-right">
+                                    <i class="fa fa-cc-paypal text-success"></i>
+                                </div>
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">PayPal</a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h2>Summary</h2>
+                                            <strong>Product:</strong>: Name of product <br />
+                                            <strong>Price:</strong>: <span class="text-navy">$452.90</span>
+                                            <p class="m-t">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                                nisi ut aliquip ex ea commodo consequat.
+
+                                            </p>
+                                            <a class="btn btn-success">
+                                                <i class="fa fa-cc-paypal">
+                                                    Purchase via PayPal
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="pull-right">
+                                    <i class="fa fa-cc-amex text-success"></i>
+                                    <i class="fa fa-cc-mastercard text-warning"></i>
+                                    <i class="fa fa-cc-discover text-danger"></i>
+                                </div>
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Credit Card</a>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h2>Summary</h2>
+                                            <strong>Product:</strong>: Name of product <br />
+                                            <strong>Price:</strong>: <span class="text-navy">$452.90</span>
+                                            <p class="m-t">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                                nisi ut aliquip ex ea commodo consequat.
+
+                                            </p>
+                                            <p>
+                                                Duis aute irure dolor
+                                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                                nulla pariatur. Excepteur sint occaecat cupidatat.
+                                            </p>
+                                        </div>
+                                        <div class="col-md-8">
+
+                                            <table class="table table-bordered table-striped">
+                                                <tr><td>Montly Subscription</td><td>
+                                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                                        <input type="hidden" name="hosted_button_id" value="64XC55VEB9QCA">
+                                                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                                    </form></td></tr>
+                                                     <tr><td>
+                                                        Cancel Subscription
+                                                    </td><td>
+                                                        <A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=78XRLSVZGW3NQ">
+                                                            <IMG SRC="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+                                                        </A>
+                                                     
+                                                     </td></tr>
+                                            </table>
+
+
+                                     
+                                          
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "TextEditor";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="surveyContainer">
+                <div id="editorElement"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Styles {
+  <link href="~/lib/surveyjs/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/lib/surveyjs/dist/css/surveyeditor.css" type="text/css" rel="stylesheet" />
+@*<link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">*@
+
+    <style>
+        #page-wrapper > div.wrapper.wrapper-content > div > div {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        #page-wrapper > div.wrapper.wrapper-content{
+            padding: 0px 0px 20px 0px !important;
+        }
+
+        #editorElement > div > div.panel.svd_content,
+        .svd_container .svd_content .svd_survey_designer .svd_toolbox,
+        .svd_container .svd_content .svd_survey_designer .svd_toolbox .btn-group-vertical .btn,
+        #surveyjsExample > div > div.panel-footer,
+        #page-wrapper{
+            background-color: white !important;
+        }
+
+    </style>
+
+}
+@section Scripts {
+    <environment names="Development,Staging,Productio">
+        <script src="~/lib/surveyjs/dist/js/knockout-min.js"></script>
+        <script src="~/lib/surveyjs/dist/js/survey.ko.js"></script>
+        <script src="~/lib/surveyjs/dist/js/ace.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="~/lib/surveyjs/dist/js/worker-json.js" type="text/javascript" charset="utf-8"></script>
+        <script src="~/lib/surveyjs/dist/js/mode-json.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="~/lib/surveyjs/dist/js/select2.min.js"></script>
+        <script src="~/lib/surveyjs/dist/js/surveyeditor.js"></script>
+    </environment>
+
+
+<script type="text/javascript">
+    Survey.Survey.cssType = "bootstrap";
+    Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+    var editorOptions = { questionTypes: ["text", "checkbox", "radiogroup", "dropdown"], showJSONEditorTab: false, showPropertyGrid: false };
+    var editor = new SurveyEditor.SurveyEditor("editorElement", editorOptions);
+    //Add all countries question into toolbox
+    editor.toolbox.addItem({
+        name: "countries",
+        isCopied: true,
+        iconName: "icon-default",
+        title: "All countries",
+        json: { "type": "dropdown", optionsCaption: "Select a country...", choicesByUrl: { url: "https://restcountries.eu/rest/v1/all" } }
+    });
+
+</script>
+}

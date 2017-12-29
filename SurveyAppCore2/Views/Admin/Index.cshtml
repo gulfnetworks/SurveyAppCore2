@@ -1,0 +1,393 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Add Company";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Add Company</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li>
+                <a>Company</a>
+            </li>
+            <li class="active">
+                <strong>Add</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="row hidden" id="successMsg">
+        <div class="col-lg-12 ">
+            <div class="alert alert-info">
+                <b>Message: </b>Successfully updated!<br /> You need to logout to apply changes
+            </div>
+        </div>
+    </div>
+    <div class="row hidden" id="errorMsg">
+        <div class="col-lg-12 ">
+            <div class="alert alert-danger">
+                <b>Message: </b>Update Settings failed.
+            </div>
+        </div>
+    </div>
+    <div class="row hidden" id="logoErrorMsg">
+        <div class="col-lg-12 ">
+            <div class="alert alert-danger">
+                <b>Message: </b>Upload image failed.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Company Settings</h5>
+
+
+                    <div class="ibox-tools">
+
+
+
+
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="tableContainer">
+                    <div class="row">
+                        <div class="col-lg-12 ">
+                            <form action="#" method="post" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Company Name:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="CompanyName" id="CompanyName" class="form-control" value="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Address:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="CompanyAddress" id="CompanyAddress" class="form-control" value="">
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Contact:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="CompanyContact" id="CompanyContact" class="form-control" value="">
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Company Logo:</label>
+                                    <div class="col-sm-5">
+                                        <input style="padding: 0px !important;" class="form-control" type="file" id="CompanyLogoUrl"
+                                               name="CompanyLogoUrl" />
+
+
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <input class="form-control" type="button"
+                                               id="btnReset"
+                                               value="Reset" />
+
+
+                                        @*<input type="text" name="CompanyLogoUrl" id="CompanyLogoUrl" class="form-control" value="">*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="col-sm-offset-2 col-sm-6">
+                                        <img src="/images/logo/blank.png" id="tempImage" class="img-thumbnail" alt="Company Logo" width="150" height="150">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Country:</label>
+                                    <div class="col-sm-6">
+                                        <select class="selectpicker form-control" data-container="body" name="Country" id="Country">
+
+                                            <option value="AE">United Arab Emirates</option>
+
+                                            <option value="Bangladesh">Bangladesh</option>
+
+                                            <option value="Brunei Darussalam">Brunei Darussalam</option>
+
+                                            <option value="Indonesia">Indonesia</option>
+
+                                            <option value="India">India</option>
+
+                                            <option value="Japan">Japan</option>
+
+                                            <option value="Sri Lanka">Sri Lanka</option>
+
+                                            <option value="Myanmar">Myanmar</option>
+
+                                            <option value="Maldives">Maldives</option>
+
+                                            <option value="Malaysia">Malaysia</option>
+
+                                            <option value="Oman">Oman</option>
+
+                                            <option value="Qatar">Qatar</option>
+
+                                            <option value="Singapore">Singapore</option>
+
+                                            <option value="Thailand">Thailand</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Company Code:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="CompanyCode" id="CompanyCode" class="form-control" value="">
+                                    </div>
+                                </div>
+
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Business hours:</label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-time"></i></span>
+                                            <span class="input-group-addon" id="basic-addon1">Start</span>
+                                            <input class="form-control" type="time" value="16:00:00" id="StartTime">
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-time"></i></span>
+                                            <span class="input-group-addon" id="basic-addon1">End</span>
+                                            <input class="form-control" type="time" value="06:00:00" id="EndTime">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Expiry Date:</label>
+                                    <div class="col-sm-6">
+
+
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="ExpiryDate" type="text" class="form-control">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+
+                                        <a class="btn btn-primary" href="#" id="btnSubmit">Add Company</a>
+                                        <a href="#" id="btnCancel" class="btn  btn-w-m btn-white">Cancel</a>
+                                    </div>
+
+                                </div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    @*<script src="~/lib/datetime-picker/js/moment-with-locales.js"></script>
+        <script src="~/lib/datetime-picker/js/bootstrap-datetimepicker.js"></script>*@
+    <script src="~/lib/bootstrap-select/js/bootstrap-select.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+
+        function GetCurrentDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = yyyy + "-" + mm + "-" + dd;
+            return today;
+
+        }
+        function AddCompanySettings(logoUrl) {
+            var jsonSettings = {
+                'TimeZone': '',
+                'CompanyName': '',
+                'CompanyAddress': '',
+                'CompanyContact': '',
+                'CompanyLogoUrl': '',
+                'Country': '',
+                'CompanyCode': '',
+                'StartTime': '',
+                'EndTime': '',
+                'ExpiryDate' : ''
+            };
+
+            jsonSettings.Country = $("#Country").selectpicker("val");
+            jsonSettings.CompanyAddress = $("#CompanyAddress").val();
+            jsonSettings.CompanyName = $("#CompanyName").val();
+            jsonSettings.CompanyContact = $("#CompanyContact").val();
+            jsonSettings.CompanyLogoUrl = logoUrl;
+            jsonSettings.CompanyCode = $("#CompanyCode").val();
+            jsonSettings.StartTime = $("#StartTime").val();
+            jsonSettings.EndTime = $("#EndTime").val();
+            jsonSettings.ExpiryDate = $("#ExpiryDate").val();
+
+            $("#successMsg").addClass("hidden");
+            $("#errorMsg").addClass("hidden");
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/AddCompanySettings",
+                contentType: "application/json",
+                async: true,
+                dataType: "json",
+                data: JSON.stringify(jsonSettings),
+                success: function (data) {
+                    //$("#successMsg").removeClass("hidden");
+                    location.href = "/Admin/CompanyList";
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    $("#errorMsg").removeClass("hidden");
+                }
+            });
+        }
+
+
+
+  
+        function UploadImage() {
+            $("#logoErrorMsg").addClass("hidden");
+            var fdata = new FormData();
+
+            var fileInput = $('#CompanyLogoUrl')[0];
+            var file = fileInput.files[0];
+            fdata.append("logo", file);
+
+            $.ajax({
+                type: 'post',
+                url: "/api/UpdateLogo",
+                data: fdata,
+                processData: false,
+                contentType: false,
+                error: function (xhr, textStatus, errorThrown) {
+                    $("#errorMsg").removeClass("hidden");
+                }
+            }).done(function (result) {
+                // do something with the result now
+                AddCompanySettings(result);
+                $("#tempImage").attr("src", result);
+            });
+
+        }
+
+        function ClearFileUpload() {
+            document.getElementById("CompanyLogoUrl").value = "";
+            document.getElementById("tempImage").src = "/images/logo/blank.png";
+
+        }
+    $(document).ready(function () {
+ 
+        $("#btnSubmit").on("click", function (e) {
+            e.preventDefault();
+            //UpdateCompanySettings();
+            UploadImage();
+        });
+
+
+        $("#btnCancel").on("click", function (e) {
+            e.preventDefault();
+            ClearFileUpload();
+        });
+
+
+        $("#btnReset").on("click", function (e) {
+            e.preventDefault();
+            //UpdateCompanySettings();
+            ClearFileUpload();
+        });
+
+
+
+        document.getElementById("CompanyLogoUrl").onchange = function () {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("tempImage").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+
+        $('#ExpiryDate').val(GetCurrentDate()).datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
+
+    });
+    </script>
+}
+
+@section Styles {
+
+    <link href="~/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+}
+
+
+
